@@ -2,5 +2,6 @@
 <CodeBlocks_workspace_file>
 	<Workspace title="afp-projeto">
 		<Project filename="afp-projeto.cbp" />
+		<Project filename="../projetodecimo/projetodecimo.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
