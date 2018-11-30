@@ -1,3 +1,13 @@
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <windows.h>
+#include <stdbool.h>
+
+FILE*acc;
+bool logged = false;
+char loggedname[50];
+
 void menuPrincipal()
 {
 
@@ -35,8 +45,10 @@ void menuPrincipal()
 
 
 }
+
 void menuNovoUtilizador()
 {
+    char txt[5]=".txt";
     system("cls");
     char passtemp[100];
     char passtemp2[100];
@@ -56,51 +68,99 @@ void menuNovoUtilizador()
     {
         strcpy(pass,passtemp);
         strcpy(nome,nometemp);
+        strcat(nome,txt);
+        acc=fopen(nome,"w");
+        fprintf(acc,"%s",passtemp);
         printf("\nRegistado com sucesso!!\nPressione qualquer tecla para voltar ao menu principal...");
-        getch();
-        menuPrincipal();
+        fclose(acc);
     }
     else
+    {
         printf("\nERRO: Campo de repetir palavra-passe não é igual à sua Palavra-passe.\nPressione qualquer tecla para voltar ao menu principal...");
+    }
     getch();
     menuPrincipal();
+
 }
 
 void loginMenu()
 {
-    char pass[50];
-    char nome[50];
+
+    char txt[5]=".txt",pass[50],passuser[50],nome[50],nomefile[50],password[50],passtest[100];
 
     system("cls");
     printf("/****************************/\n");
     printf("/** Jogo da Forca - Entrar **/\n");
     printf("/****************************/\n");
     printf("\nIntroduza o seu nome: ");
-    scanf("%s",nome);
-    printf("\nIntroduza a sua palavra pass: ");
-    scanf("%s",pass);
-    if(strcmp("admin",nome)==0 && strcmp("admin",pass)==0)
+    getchar();
+    gets(nome);
+    strcpy(nomefile,nome);
+    strcat(nomefile,txt);
+    printf("\nIntroduza a sua palavra-passe: ");
+    scanf("%s",&pass);
+    strcpy(passtest,nome);
+    strcat(passtest,txt);
+
+    acc=fopen(nomefile,"r");
+
+    fscanf(acc,"%s",&password);
+
+    if(strcmp(password,pass)!=0)
     {
+        system("cls");
+        printf("\n\t A verificar se a senha está correta ");
+        Sleep(200);
+        printf(".");
+        Sleep(200);
+        printf(".");
+        Sleep(200);
+        printf(".\n");
+        Sleep(500);
+        printf("\n\tSenha incorreta, tente novamente!\n");
+        Sleep(800);
+        strcpy(loggedname,"");
+        logged = false;
+        fclose(acc);
+        menuPrincipal();
+    }
+    else
+    {
+        system("cls");
+        printf("\n\t A verificar se a senha está correta ");
+        Sleep(200);
+        printf(".");
+        Sleep(200);
+        printf(".");
+        Sleep(200);
+        printf(".\n");
+        Sleep(500);
+        printf("\n\t Entrou com sucesso na sua conta!\n");
+        Sleep(800);
+        strcpy(loggedname,nome);
+        logged = true;
+        fclose(acc);
         menuForca();
-    }else
-            printf("\nERRO: Nome ou Palavra-Passe estão incorretas.\nPressione qualquer tecla para voltar ao menu principal...");
-    getch();
-    menuPrincipal();
+    }
 
 }
 
-void menuForca(){
-    char op;
-    system("cls");
-    printf("/*******************/\n");
-    printf("/** Jogo da Forca **/\n");
-    printf("/*******************/\n");
-    printf("\n1. P1 VS PC");
-    printf("\n2. P1 VS P2");
-    printf("\n3. Ver Ranking");
-    printf("\n4. Sair ");
-    printf("\nEscolha uma opção:")
-    scanf(" %c",&op);
+void menuForca()
+{
+    if(logged == true)
+    {
+        char op;
+        system("cls");
+        printf("/*******************/\n");
+        printf("/** Jogo da Forca **/\n");
+        printf("/*******************/\n");
+        printf("\nBem vindo(a) %s,\n",loggedname);
+        printf("\n1. P1 VS PC");
+        printf("\n2. P1 VS P2");
+        printf("\n3. Ver Ranking");
+        printf("\n4. Sair ");
+        printf("\nEscolha uma opção:");
+        scanf(" %c",&op);
 
         switch(op)
         {
@@ -113,13 +173,17 @@ void menuForca(){
             case '4':
                 menuPrincipal();
                 break;
-
                 if(op < '1' || op > '4')
                 {
                     system("cls");
                     printf("\nOpção Errada\n\n");
                 }
-
         }
 
+    }
+    else
+    {
+        strcpy(loggedname,"");
+        menuPrincipal();
+    }
 }
