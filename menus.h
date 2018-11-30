@@ -3,5 +3,6 @@
 
 void menuPrincipal();
 void menuNovoUtilizador();
- menuLogin(char nome, char pass);
+
+char loginMenu();
 #endif // MENUS_H_INCLUDED

@@ -14,57 +14,112 @@ void menuPrincipal()
         printf("\n\nEscolha uma opcão: ");
         scanf(" %c",&op);
 
-        switch(op){
-        case '1':
-            menuLogin();break;
-        case '2':
-            menuNovoUtilizador();break;
-        case '3':
-            continue;
-
-        if(op < '1' || op > '3')
+        switch(op)
         {
-            system("cls");
-            printf("\nOpção Errada\n\n");
-        }
+            case '1':
+                loginMenu();
+                break;
+            case '2':
+                menuNovoUtilizador();
+                break;
 
+                if(op < '1' || op > '3')
+                {
+                    system("cls");
+                    printf("\nOpção Errada\n\n");
+                }
+
+        }
     }
-   } while(op<'1' || op>'3');
+    while(op<'1' || op>'3');
 
 
 }
-    void menuNovoUtilizador()
+void menuNovoUtilizador()
 {
     system("cls");
-    char passtemp, passtemp2,nometemp,pass,nome;
+    char passtemp[100];
+    char passtemp2[100];
+    char nometemp[50];
+    char pass[50];
+    char nome[50];
     printf("/************************************/\n");
     printf("/** Jogo da Forca - Novo utlizador **/\n");
     printf("/************************************/\n");
     printf("\nIntroduza o seu nome: ");
-    gets(nometemp);
+    scanf("%s",nometemp);
     printf("\nIntroduza a sua palavra-passe: ");
-    gets(passtemp);
+    scanf("%s",passtemp);
     printf("\nIntroduza novamente a sua palavra-passe: ");
-    gets(passtemp2);
-
-    if(passtemp2==passtemp)
+    scanf("%s",passtemp2);
+    if(strcmp(passtemp,passtemp2)==0)
     {
-        pass = passtemp;
-        nome = nometemp;
+        strcpy(pass,passtemp);
+        strcpy(nome,nometemp);
+        printf("\nRegistado com sucesso!!\nPressione qualquer tecla para voltar ao menu principal...");
+        getch();
+        menuPrincipal();
     }
-    else{
-        printf("\n\nCampo de repetir palavra-passe não é igual à sua Palavra-pass");
-    }
+    else
+        printf("\nERRO: Campo de repetir palavra-passe não é igual à sua Palavra-passe.\nPressione qualquer tecla para voltar ao menu principal...");
+    getch();
+    menuPrincipal();
 }
 
-menuLogin(char nome, char pass)
+void loginMenu()
 {
+    char pass[50];
+    char nome[50];
+
     system("cls");
     printf("/****************************/\n");
     printf("/** Jogo da Forca - Entrar **/\n");
     printf("/****************************/\n");
     printf("\nIntroduza o seu nome: ");
-    gets(nome);
-    printf("\nIntroduza a sua palavra-passe: ");
-    gets(pass);
+    scanf("%s",nome);
+    printf("\nIntroduza a sua palavra pass: ");
+    scanf("%s",pass);
+    if(strcmp("admin",nome)==0 && strcmp("admin",pass)==0)
+    {
+        menuForca();
+    }else
+            printf("\nERRO: Nome ou Palavra-Passe estão incorretas.\nPressione qualquer tecla para voltar ao menu principal...");
+    getch();
+    menuPrincipal();
+
+}
+
+void menuForca(){
+    char op;
+    system("cls");
+    printf("/*******************/\n");
+    printf("/** Jogo da Forca **/\n");
+    printf("/*******************/\n");
+    printf("\n1. P1 VS PC");
+    printf("\n2. P1 VS P2");
+    printf("\n3. Ver Ranking");
+    printf("\n4. Sair ");
+    printf("\nEscolha uma opção:")
+    scanf(" %c",&op);
+
+        switch(op)
+        {
+            case '1':
+                break;
+            case '2':
+                break;
+            case '3':
+                break;
+            case '4':
+                menuPrincipal();
+                break;
+
+                if(op < '1' || op > '4')
+                {
+                    system("cls");
+                    printf("\nOpção Errada\n\n");
+                }
+
+        }
+
 }
