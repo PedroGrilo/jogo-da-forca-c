@@ -16,3 +16,28 @@
 
 1543534676 c:\users\creep\desktop\ctesp\afp\afp-projeto\menus.h
 
+1544000069 source:c:\users\sala230_pc8_ips\desktop\ctesp\afp\afp-projeto\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<string.h>
+	<ctype.h>
+	"menus.h"
+	"forcapvp.h"
+
+1543999058 c:\users\sala230_pc8_ips\desktop\ctesp\afp\afp-projeto\menus.h
+
+1544001522 c:\users\sala230_pc8_ips\desktop\ctesp\afp\afp-projeto\forcapvp.h
+
+1544001522 source:c:\users\sala230_pc8_ips\desktop\ctesp\afp\afp-projeto\menus.c
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<windows.h>
+	<stdbool.h>
+
+1544003947 source:c:\users\sala230_pc8_ips\desktop\ctesp\afp\afp-projeto\forcapvp.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
