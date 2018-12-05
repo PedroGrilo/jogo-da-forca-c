@@ -48,7 +48,7 @@ void menuPrincipal()
 
 void menuNovoUtilizador()
 {
-    char txt[5]=".txt";
+    char txt[5]=".dat";
     system("cls");
     char passtemp[100];
     char passtemp2[100];
@@ -69,7 +69,7 @@ void menuNovoUtilizador()
         strcpy(pass,passtemp);
         strcpy(nome,nometemp);
         strcat(nome,txt);
-        acc=fopen(nome,"w");
+        acc=fopen(nome,"wb");
         fprintf(acc,"%s",passtemp);
         printf("\nRegistado com sucesso!!\nPressione qualquer tecla para voltar ao menu principal...");
         fclose(acc);
@@ -86,7 +86,7 @@ void menuNovoUtilizador()
 void loginMenu()
 {
 
-    char txt[5]=".txt",pass[50],passuser[50],nome[50],nomefile[50],password[50],passtest[100];
+    char txt[5]=".dat",pass[50],passuser[50],nome[50],nomefile[50],password[50],passtest[100];
 
     system("cls");
     printf("/****************************/\n");
@@ -102,7 +102,7 @@ void loginMenu()
     strcpy(passtest,nome);
     strcat(passtest,txt);
 
-    acc=fopen(nomefile,"r");
+    acc=fopen(nomefile,"rb");
 
     fscanf(acc,"%s",&password);
 
@@ -155,16 +155,17 @@ void menuForca()
         printf("/** Jogo da Forca **/\n");
         printf("/*******************/\n");
         printf("\nBem vindo(a) %s,\n",loggedname);
-        printf("\n1. P1 VS PC");
-        printf("\n2. P1 VS P2");
+        printf("\n1. P1 VS P2");
+        printf("\n2. P1 VS PC");
         printf("\n3. Ver Ranking");
-        printf("\n4. Sair ");
+        printf("\n5. Sair ");
         printf("\nEscolha uma opção:");
         scanf(" %c",&op);
 
         switch(op)
         {
             case '1':
+                words();
                 break;
             case '2':
                 break;
