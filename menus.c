@@ -3,14 +3,19 @@
 #include <stdio.h>
 #include <windows.h>
 #include <stdbool.h>
+#define MAX_CHAR 21
 
-FILE*acc;
-bool logged = false;
-char loggedname[50];
+FILE *acc;
+
+struct users
+{
+    char nome[MAX_CHAR];
+    char pass[MAX_CHAR];
+    int pontos;
+} user;
 
 void menuPrincipal()
 {
-
     char op;
     do
     {
@@ -38,153 +43,136 @@ void menuPrincipal()
                     system("cls");
                     printf("\nOpção Errada\n\n");
                 }
-
         }
     }
     while(op<'1' || op>'3');
-
-
 }
 
 void menuNovoUtilizador()
 {
-    char txt[5]=".dat";
+    //nao esquecer verificar os nomes iguais
     system("cls");
+
+    char nometemp[100];
     char passtemp[100];
     char passtemp2[100];
-    char nometemp[50];
-    char pass[50];
-    char nome[50];
+
+    acc=fopen("users.dat","a+");
+
     printf("/************************************/\n");
     printf("/** Jogo da Forca - Novo utlizador **/\n");
     printf("/************************************/\n");
     printf("\nIntroduza o seu nome: ");
-    scanf("%s",nometemp);
+    scanf("%s",user.nome);
     printf("\nIntroduza a sua palavra-passe: ");
     scanf("%s",passtemp);
     printf("\nIntroduza novamente a sua palavra-passe: ");
     scanf("%s",passtemp2);
+
     if(strcmp(passtemp,passtemp2)==0)
     {
-        strcpy(pass,passtemp);
-        strcpy(nome,nometemp);
-        strcat(nome,txt);
-        acc=fopen(nome,"wb");
-        fprintf(acc,"%s",passtemp);
-        printf("\nRegistado com sucesso!!\nPressione qualquer tecla para voltar ao menu principal...");
-        fclose(acc);
+        user.pontos = 0;
+        strcpy(user.pass,passtemp);
+        fprintf(acc,"%s\t%s\t%d\n",user.nome,user.pass,user.pontos);
+
+        if(fprintf != 0)
+            printf("\nRegistado com sucesso!\n\nPressione qualquer tecla para voltar ao menu principal...");
+        else
+            printf("Erro ao registar, tente novamente!\n");
     }
     else
     {
         printf("\nERRO: Campo de repetir palavra-passe não é igual à sua Palavra-passe.\nPressione qualquer tecla para voltar ao menu principal...");
     }
+
+    fclose (acc);
     getch();
     menuPrincipal();
-
 }
 
 void loginMenu()
 {
 
-    char txt[5]=".dat",pass[50],passuser[50],nome[50],nomefile[50],password[50],passtest[100];
+    char loggedname[50],nome[50],pass[50];
+    int pontos =0,disponivel=0;
+    acc=fopen("users.dat","r");
 
     system("cls");
     printf("/****************************/\n");
     printf("/** Jogo da Forca - Entrar **/\n");
     printf("/****************************/\n");
     printf("\nIntroduza o seu nome: ");
-    getchar();
-    gets(nome);
-    strcpy(nomefile,nome);
-    strcat(nomefile,txt);
+    scanf("%s",user.nome);
     printf("\nIntroduza a sua palavra-passe: ");
-    scanf("%s",&pass);
-    strcpy(passtest,nome);
-    strcat(passtest,txt);
+    scanf("%s",user.pass);
 
-    acc=fopen(nomefile,"rb");
+    while(fscanf(acc,"%s\t%s\t%i",nome,pass,&pontos)!=EOF)
+        if(!strcmp(nome,user.nome) && !strcmp(pass,user.pass))
+            disponivel=1;
 
-    fscanf(acc,"%s",&password);
+    system("cls");
+    printf("\n\t A verificar se a senha está correta ");
+    Sleep(200);
+    printf(".");
+    Sleep(200);
+    printf(".");
+    Sleep(200);
+    printf(".\n");
+    Sleep(500);
 
-    if(strcmp(password,pass)!=0)
+    if(disponivel==0)
     {
-        system("cls");
-        printf("\n\t A verificar se a senha está correta ");
-        Sleep(200);
-        printf(".");
-        Sleep(200);
-        printf(".");
-        Sleep(200);
-        printf(".\n");
-        Sleep(500);
         printf("\n\tSenha incorreta, tente novamente!\n");
         Sleep(800);
         strcpy(loggedname,"");
-        logged = false;
-        fclose(acc);
         menuPrincipal();
+        fclose(acc);
     }
     else
     {
-        system("cls");
-        printf("\n\t A verificar se a senha está correta ");
-        Sleep(200);
-        printf(".");
-        Sleep(200);
-        printf(".");
-        Sleep(200);
-        printf(".\n");
-        Sleep(500);
         printf("\n\t Entrou com sucesso na sua conta!\n");
         Sleep(800);
-        strcpy(loggedname,nome);
-        logged = true;
+        strcpy(loggedname,user.nome);
+        menuForca(loggedname,pontos);
         fclose(acc);
-        menuForca();
     }
-
 }
 
-void menuForca()
+void menuForca(char loggedname[],int pontos)
 {
-    if(logged == true)
-    {
-        char op;
-        system("cls");
-        printf("/*******************/\n");
-        printf("/** Jogo da Forca **/\n");
-        printf("/*******************/\n");
-        printf("\nBem vindo(a) %s,\n",loggedname);
-        printf("\n1. P1 VS P2");
-        printf("\n2. P1 VS PC");
-        printf("\n3. Ver Ranking");
-        printf("\n5. Sair ");
-        printf("\nEscolha uma opção:");
-        scanf(" %c",&op);
+    char op;
 
-        switch(op)
-        {
-            case '1':
-                words();
-                break;
-            case '2':
-                break;
-            case '3':
-                break;
-            case '4':
-                menuPrincipal();
-                break;
-                if(op < '1' || op > '4')
-                {
-                    system("cls");
-                    printf("\nOpção Errada\n\n");
-                }
-        }
+    system("cls");
+    printf("/*******************/\n");
+    printf("/** Jogo da Forca **/\n");
+    printf("/*******************/\n");
+    printf("\nBem vindo(a) %s,",loggedname);
+    printf("\nPontos: %d\n",pontos);
+    printf("\n1. P1 VS P2");
+    printf("\n2. P1 VS PC");
+    printf("\n3. Ver Ranking");
+    printf("\n4. Sair ");
+    printf("\nEscolha uma opção:");
+    scanf(" %c",&op);
 
-    }
-    else
+    switch(op)
     {
-        strcpy(loggedname,"");
-        menuPrincipal();
+        case '1':
+            //meter aqui a funçao
+            break;
+        case '2':
+            break;
+        case '3':
+            break;
+        case '4':
+            menuPrincipal();
+            break;
+            if(op < '1' || op > '4')
+            {
+                system("cls");
+                printf("\nOpção Errada\n\n");
+            }
     }
 }
+
+
