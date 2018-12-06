@@ -90,9 +90,9 @@ void menuNovoUtilizador()
                 userexists = 1;
 
         if(userexists == 0){
+            fprintf(acc,"%s\t%s\t%d\n",user.nome,user.pass,user.pontos);
             if(fprintf != 0){
                 printf("\n\tRegistado com sucesso!\n\n\tPressione qualquer tecla para voltar ao menu principal...");
-                fprintf(acc,"%s\t%s\t%d\n",user.nome,user.pass,user.pontos);
             }else
                 printf("\n\tErro ao registar, tente novamente!\n\n\tPressione qualquer tecla para voltar ao menu principal...");
         }else
