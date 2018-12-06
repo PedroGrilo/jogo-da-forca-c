@@ -14,6 +14,19 @@ struct users
     int pontos;
 } user;
 
+void animation(char string[])
+{
+    system("cls");
+    printf("\n\t%s",string);
+    Sleep(200);
+    printf(".");
+    Sleep(200);
+    printf(".");
+    Sleep(200);
+    printf(".\n");
+    Sleep(500);
+}
+
 void menuPrincipal()
 {
     char op;
@@ -37,12 +50,6 @@ void menuPrincipal()
             case '2':
                 menuNovoUtilizador();
                 break;
-
-                if(op < '1' || op > '3')
-                {
-                    system("cls");
-                    printf("\nOpção Errada\n\n");
-                }
         }
     }
     while(op<'1' || op>'3');
@@ -69,24 +76,33 @@ void menuNovoUtilizador()
     printf("\nIntroduza novamente a sua palavra-passe: ");
     scanf("%s",passtemp2);
 
-    if(strcmp(passtemp,passtemp2)==0)
-    {
+    animation("A registar");
+
+    char nome[50],pass[50];
+    int userexists=0,pontos;
+
+    if(strcmp(passtemp,passtemp2)==0){
         user.pontos = 0;
         strcpy(user.pass,passtemp);
-        fprintf(acc,"%s\t%s\t%d\n",user.nome,user.pass,user.pontos);
 
-        if(fprintf != 0)
-            printf("\nRegistado com sucesso!\n\nPressione qualquer tecla para voltar ao menu principal...");
-        else
-            printf("Erro ao registar, tente novamente!\n");
-    }
-    else
-    {
-        printf("\nERRO: Campo de repetir palavra-passe não é igual à sua Palavra-passe.\nPressione qualquer tecla para voltar ao menu principal...");
+        while(fscanf(acc,"%s\t%s\t%i",nome,pass,&pontos)!=EOF)
+            if(!strcmp(nome,user.nome))
+                userexists = 1;
+
+        if(userexists == 0){
+            if(fprintf != 0){
+                printf("\n\tRegistado com sucesso!\n\n\tPressione qualquer tecla para voltar ao menu principal...");
+                fprintf(acc,"%s\t%s\t%d\n",user.nome,user.pass,user.pontos);
+            }else
+                printf("\n\tErro ao registar, tente novamente!\n\n\tPressione qualquer tecla para voltar ao menu principal...");
+        }else
+            printf("\n\tErro ao registar, utilizador ja existe!\n\n\tPressione qualquer tecla para voltar ao menu principal...");
+    }else{
+        printf("\n\tERRO: Campo de repetir palavra-passe não é igual à sua Palavra-passe.\n\n\tPressione qualquer tecla para voltar ao menu principal...");
     }
 
-    fclose (acc);
     getch();
+    fclose (acc);
     menuPrincipal();
 }
 
@@ -110,15 +126,7 @@ void loginMenu()
         if(!strcmp(nome,user.nome) && !strcmp(pass,user.pass))
             disponivel=1;
 
-    system("cls");
-    printf("\n\t A verificar se a senha está correta ");
-    Sleep(200);
-    printf(".");
-    Sleep(200);
-    printf(".");
-    Sleep(200);
-    printf(".\n");
-    Sleep(500);
+    animation("A verificar se está correta");
 
     if(disponivel==0)
     {
