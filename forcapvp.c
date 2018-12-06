@@ -1,58 +1,65 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-void words (){
+void words ()
+{
     char repetir, forca[100], frase[100];
-    int i;
-    system("cls");
-    printf("Introduza a sua palavra/frase: \n");
-    getchar();
-    gets(forca);
-    system("cls");
-    for (i=0;forca[i]!='\0';i++){
-        if(forca[i]==' '){
-            frase[i]=' ';
-        }else{
-            frase[i]='-';
-        }
-    }
-    puts(frase);
+    int i=0,k=0;
+    do{
+        system("cls");
+        printf("Introduza a sua palavra/frase: \n");
+        getchar();
+        gets(forca);
+        i=strlen(forca);
+        system("cls");
+        do{
+            if(forca[k]==' '){
+                frase[k]=' ';
+            }else{
+                frase[k]='-';
+            }
+            k++;
+        }while(k<i);
+        frase[k]='\0';
+        system("cls");
+        puts(forca);
+        puts("Deseja alterar a sua frase ? Alterar(R)");
+        scanf(" %c",&repetir);
+    }while(tolower(repetir)=='r');
     guesser(forca,frase);
     puts("");
 }
-void guesser(char forca[100],char frase[100]){
-    char tentativa[26];
-    int falhas=0,falha=0,i,k;
-    for(i=0;i<100;i++){
-        printf("Introduza o seu palpite: \n");
+void guesser(char forca[100],char frase[100])
+{
+    char tentativa[36];
+    int i=0,k=0,samechar=0,guesssize=strlen(forca),falha=0,falhas=0;
+    do{
+        puts(frase);
+        puts("Intrduza o seu palpite");
         fflush(stdin);
-        scanf("%c",&tentativa[i]);
+        tentativa[i]=getchar();
         falha=1;
-        for(k=0;forca[k]!='\0';k++){
-            if(tentativa[i]==forca[k]){
-                if(tentativa[i]==' '){
-                    continue;
+        for(k=0;k<i;k++){
+            if(tentativa[i]==tentativa[k]){
+                printf("%c Esse caracter ja foi introduzido\n",tentativa[i]);
+                i--;
+                samechar=1;
+                continue;
+            }else{
+                samechar=0;
+            }
+        }
+        if(samechar==0){
+            for(k=0;k<guesssize;k++){
+                if(tolower(tentativa[i])==tolower(forca[k])){
+                    frase[k]=tentativa[i];
+                    falha=0;
                 }
-                frase[k]=tentativa[i];
-                falha=0;
             }
-        }
-        system("cls");
-        printf("%s \n",frase);
-        if(falha==1){
-            falhas++;
-            if(falhas==6){
-                break;
-            }
-        }else
-            if(strcmp(frase,forca)==1){
-                break;
-                system("cls");
-                printf("PARABENS GANHOU!");
-            }
-        }
-        printf("\n\n\nforca: %s\n\nfrase: %s\n\n\n",forca,frase);
 
-    }
+        }
+        i++;
+    }while(i<36);
+}
 
 
