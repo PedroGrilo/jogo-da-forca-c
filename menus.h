@@ -3,6 +3,6 @@
 
 void menuPrincipal();
 void menuNovoUtilizador();
-
+void playervsplayer();
 char loginMenu();
 #endif // MENUS_H_INCLUDED

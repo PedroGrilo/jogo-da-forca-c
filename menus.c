@@ -138,7 +138,7 @@ void loginMenu()
     }
     else
     {
-        printf("\n\t Entrou com sucesso na sua conta!\n");
+        printf("\n\tEntrou com sucesso na sua conta!\n");
         Sleep(800);
         strcpy(loggedname,user.nome);
         menuForca(loggedname,pontos);
@@ -166,7 +166,7 @@ void menuForca(char loggedname[],int pontos)
     switch(op)
     {
         case '1':
-            //meter aqui a funçao
+            playervsplayer();
             break;
         case '2':
             break;
