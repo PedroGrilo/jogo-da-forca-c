@@ -166,7 +166,8 @@ void menuForca(char loggedname[],int pontos)
     switch(op)
     {
         case '1':
-            playervsplayer();
+            jogo();
+            mostrarResultado();
             break;
         case '2':
             break;

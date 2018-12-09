@@ -3,6 +3,8 @@
 
 void menuPrincipal();
 void menuNovoUtilizador();
-void playervsplayer();
 char loginMenu();
+void start(void);
+int jogo(void);
+void mostrarResultado(int resultado);
 #endif // MENUS_H_INCLUDED

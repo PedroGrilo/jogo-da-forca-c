@@ -6,110 +6,96 @@
 #include <ctype.h>
 #define VIDAS 6
 
-void playervsplayer()
-{
-    system("cls");
-    int chances = VIDAS,m=0,x=0,tamanho=0;
-    char frase[100],tentativa[100],letra,samechar,introduzidas[26];
-    bool digit =false, erro = true;
-
-    do
-    {
-        printf("Player 1:\n");
-        printf("Introduza uma palavra: ");
-        getchar();
-        gets(frase);
-        tamanho = strlen(frase);
-
-        if(strlen(frase)<=2){
-            system("cls");
-            printf("Erro: O minimo de letras são 3. Tente novamente.\n");
-        }
-
-        for(int h=0;h<tamanho;h++){
-            if(isdigit(frase[h])){
-                digit = true;
-                 system("cls");
-                 printf("Erro: A palavra só pode conter letras. Tente Novamente.\n");
-            }else
-                digit = false;
-        }
-
-    }while((strlen(frase)<=2)||digit ==true);
-
-    for(x = 0; x<tamanho; x++)
-    {
-        if(frase[x]==' ')
-        {
-            tentativa[x]=' '; //espaço
-        }
-        else
-        {
-            tentativa[x]='_'; //underscore
-        }
-    }
-
-    tentativa[x] = '\0';
+char palavra[20];
+char forca[20];
+char introduzidos[27];
 
 
-    while((chances>=1) && strcmp(frase,tentativa)){
-        system("cls");
-        printf("Player 2:\n");
-        if(m>0){
-              printf("Letras introduzidas:");
-              for(int n=0;n<m;n++){
-                printf(" %c",introduzidas[n]);
-                }
-        }
-        printf("Vidas: %d\n",chances);
+int jogo(void) {
 
-        for(int i=0; i<strlen(tentativa); i++)
-        {
-            printf("%c ",tentativa[i]);
-        }
+  printf("\tPlayer 1:\n");
+   printf("\tDigite uma palavra: ");
+   getchar();
+   gets(palavra);
+   fflush(stdin);
+   int i, x;
+   for (x = 0; x < strlen(palavra); x++)
+      if (palavra[x] == ' ')
+         forca[x] = ' '; //espaço
+      else
+         forca[x] = '_'; //underscore
 
-        printf("\nInsira uma letra: ");
-        scanf("%c",&letra);
+   char letra;
+   int chances = VIDAS, letras = 0,vitoria = 0, tried = 0, encontrou = 0;
 
-        introduzidas[m] = letra;
+   letras = strlen(palavra);
 
+   while (chances > 0) {
+      system("cls");
+      printf("\tPlayer 2:\n");
+      printf("\tChances: %d - palavras tem %d letras\n\n", chances, letras);
 
-        for(int i = 0; i<tamanho; i++)
-        {
-            if(letra==frase[i]){
-                tentativa[i]=letra;
-                erro=false;
-            }
-        }
+      printf("\t%s", forca);
 
-        if(erro==true)
-            chances=chances-1;
+      if (strlen(introduzidos) > 0)
+         printf("\n\tLetras introduzidas: %s", introduzidos);
 
-        m++;
-    }//acaba o while
+      printf("\n\n\tDigite uma letra: ");
+      scanf("%c", & letra);
+      fflush(stdin);
 
+      if (!isalpha(letra)) continue;
+      vitoria = 1;
+      for (i = 0; introduzidos[i] != 0; i++) {
+         if (introduzidos[i] == toupper(letra)) {
+            tried = 1;
+            break;
+         }
+      }
 
-    if(chances == 0)
-    {
-        system("cls");
-        printf("\n\tFrase: %s\n",frase);
-        printf("\tPerdeu!! Perdeu o jogo da forca contra o Player 1.\n\tA voltar para o menu principal...");
-        Sleep(500);
-    }
+      if (tried) continue;
 
-    if(!strcmp(frase,tentativa))
-    {
-        system("cls");
-        printf("\n\tFrase: %s\n",frase);
-        printf("\tParabéns!! Ganhou o jogo da forca contra o Player 1.\n\tA voltar para o menu principal...");
-        Sleep(500);
+      for (i = 0; forca[i] != 0; i++) {
+         if (toupper(forca[i]) == toupper(letra)) {
+            tried = 1;
+            break;
+         }
+      }
 
-    }
+      if (tried) continue;
 
+      introduzidos[strlen(introduzidos)] = toupper(letra); //colocar na string, para mostrar os caracters introduzidos
+
+      for (i = 0; i < strlen(palavra); i++) {
+         if (!isalpha(palavra[i]))
+            continue;
+
+         if (forca[i] == '_') { //para verificar se ainda existe underscores no array forca
+            if (toupper(palavra[i]) == toupper(letra)) {
+               forca[i] = palavra[i];
+               encontrou = 1;
+            } else
+               vitoria = 0;
+         }
+      }
+
+      if (!encontrou)//se nao encontrou a letra na string
+         chances--;
+
+      if (vitoria)
+         return 1;
+   }
+   return 0;
 }
 
-
-
+void mostrarResultado(int resultado) {
+   fflush(stdin);
+   if (resultado == 0) {
+      printf("\nVoce perdeu. \nA palavra era %s", palavra);
+   } else {
+      printf("\nParabens, voce acertou a palavra %s ", palavra);
+   }
+}
 
 
 
