@@ -14,6 +14,12 @@ struct users
     int pontos;
 } user;
 
+void header()
+{
+    printf("/*******************/\n");
+    printf("/** Jogo da Forca **/\n");
+    printf("/*******************/\n");
+}
 void animation(char string[])
 {
     system("cls");
@@ -81,7 +87,8 @@ void menuNovoUtilizador()
     char nome[50],pass[50];
     int userexists=0,pontos;
 
-    if(strcmp(passtemp,passtemp2)==0){
+    if(strcmp(passtemp,passtemp2)==0)
+    {
         user.pontos = 0;
         strcpy(user.pass,passtemp);
 
@@ -89,15 +96,21 @@ void menuNovoUtilizador()
             if(!strcmp(nome,user.nome))
                 userexists = 1;
 
-        if(userexists == 0){
+        if(userexists == 0)
+        {
             fprintf(acc,"%s\t%s\t%d\n",user.nome,user.pass,user.pontos);
-            if(fprintf != 0){
+            if(fprintf != 0)
+            {
                 printf("\n\tRegistado com sucesso!\n\n\tPressione qualquer tecla para voltar ao menu principal...");
-            }else
+            }
+            else
                 printf("\n\tErro ao registar, tente novamente!\n\n\tPressione qualquer tecla para voltar ao menu principal...");
-        }else
+        }
+        else
             printf("\n\tErro ao registar, utilizador ja existe!\n\n\tPressione qualquer tecla para voltar ao menu principal...");
-    }else{
+    }
+    else
+    {
         printf("\n\tERRO: Campo de repetir palavra-passe não é igual à sua Palavra-passe.\n\n\tPressione qualquer tecla para voltar ao menu principal...");
     }
 
@@ -151,9 +164,7 @@ void menuForca(char loggedname[],int pontos)
     char op;
 
     system("cls");
-    printf("/*******************/\n");
-    printf("/** Jogo da Forca **/\n");
-    printf("/*******************/\n");
+    header();
     printf("\nBem vindo(a) %s,",loggedname);
     printf("\nPontos: %d\n",pontos);
     printf("\n1. P1 VS P2");

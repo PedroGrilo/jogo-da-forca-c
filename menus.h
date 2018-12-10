@@ -4,6 +4,7 @@
 void menuPrincipal();
 void menuNovoUtilizador();
 char loginMenu();
+void header();
 void start(void);
 int jogo(void);
 void mostrarResultado(int resultado);
