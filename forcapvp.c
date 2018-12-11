@@ -7,24 +7,34 @@ void words ()
     int i=0,k=0;
     do{
         system("cls");
+        if(repetir=='r'&&forca[0]==0){
+            printf("infelizmente, não sao aceites números\n\n");
+        }
+        repetir='\0';
         printf("Introduza a sua palavra/frase: \n");
-        getchar();
+        fflush(stdin);
         gets(forca);
         i=strlen(forca);
         system("cls");
         do{
             if(forca[k]==' '){
                 frase[k]=' ';
+            }else if(forca[k]<='9'&&forca[k]>='0'){
+                forca[0] = '\0';
+                repetir='r';
+                break;
             }else{
                 frase[k]='-';
             }
-            k++;
+                k++;
         }while(k<i);
         frase[k]='\0';
         system("cls");
         puts(forca);
-        puts("Deseja alterar a sua frase, se sim prima [R].");
-        scanf(" %c",&repetir);
+        if(repetir!='r'){
+            puts("Deseja alterar a sua frase, se sim prima [R].");
+            scanf(" %c",&repetir);
+        }
     }while(tolower(repetir)=='r');
     system("cls");
     guesser(forca,frase);
@@ -32,7 +42,7 @@ void words ()
 }
 void guesser(char forca[100],char frase[100])
 {
-    char tentativa[36],falhas[6];
+    char tentativa[26],falhas[6];
     int i=0,k=0,samechar=0,guesssize=strlen(forca),falha=1,falhascount=0,counter=0;
     do{
         if(samechar!=1){
@@ -40,13 +50,17 @@ void guesser(char forca[100],char frase[100])
         }
         switch(falhascount){
             default:  break;
-
-
         }
         puts(frase);
         puts("Intrduza o seu palpite");
         fflush(stdin);
         tentativa[i]=getchar();
+        if(tentativa[i]>='0'&&tentativa[i]<='9'){
+            system("cls");
+            printf("Infelizmente não pode introduzir números");
+            i--;
+            continue;
+        }
         falha=1;
         for(k=0;k<i;k++){
             if(tentativa[i]==tentativa[k]){
@@ -66,10 +80,10 @@ void guesser(char forca[100],char frase[100])
                     falha=0;
                 }
             }
-            if(falha==1 && falhascount<6 && samechar==0){
+            if(falha==1 && falhascount<5 && samechar==0){
                 falhas[falhascount]=tentativa[i];
                 falhascount++;
-            }else if(falhascount>=6){
+            }else if(falhascount>=5){
                 system("cls");
                 printf("Perdeu, Lamento");
                 break;
@@ -81,7 +95,7 @@ void guesser(char forca[100],char frase[100])
             }
         }
         i++;
-    }while(i<36);
+    }while(i<26);
 }
 
 
