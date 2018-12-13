@@ -8,6 +8,7 @@ FILE*acc;
 bool logged = false;
 char loggedname[50];
 
+
 void menuPrincipal()
 {
 
