@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1544784446 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\menus.c
+1544816112 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\menus.c
 	<string.h>
 	<stdlib.h>
 	<stdio.h>
@@ -43,14 +43,14 @@
 	<stdlib.h>
 	<string.h>
 
-1544809516 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\forcapvp.c
+1544809761 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\forcapvp.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
 1544478797 c:\users\creep\desktop\ctesp\afp\afp-projeto\forcapvp.h
 
-1544809067 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\animacao.c
+1544809843 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\animacao.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
