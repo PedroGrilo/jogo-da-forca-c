@@ -5,12 +5,11 @@
 #include <ctype.h>
 #include "menus.h"
 #include "forcapvp.h"
+#include "animacao.h"
 
 int main()
 {
-
     system("color F0");
-    setlocale(LC_ALL,"");
     menuPrincipal();
     return 0;
 }

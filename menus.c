@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <windows.h>
 #include <stdbool.h>
-
 FILE*acc;
 bool logged = false;
 char loggedname[50];
