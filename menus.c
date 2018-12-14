@@ -110,7 +110,7 @@ void loginMenu()
 {
 
     char loggedname[50],nome[50],pass[50];
-    int pontos =0,disponivel=0;
+    int disponivel=0;
     acc=fopen("users.dat","r");
 
     system("cls");
@@ -122,7 +122,7 @@ void loginMenu()
     printf("\nIntroduza a sua palavra-passe: ");
     scanf("%s",user.pass);
 
-    while(fscanf(acc,"%s\t%s\t%i",nome,pass,&pontos)!=EOF)
+    while(fscanf(acc,"%s\t%s\t%i",nome,pass)!=EOF)
         if(!strcmp(nome,user.nome) && !strcmp(pass,user.pass))
             disponivel=1;
 
@@ -141,12 +141,12 @@ void loginMenu()
         printf("\n\t Entrou com sucesso na sua conta!\n");
         Sleep(800);
         strcpy(loggedname,user.nome);
-        menuForca(loggedname,pontos);
+        menuForca(loggedname);
         fclose(acc);
     }
 }
 
-void menuForca(char loggedname[],int pontos)
+void menuForca(char loggedname[])
 {
     char op;
 
@@ -155,7 +155,6 @@ void menuForca(char loggedname[],int pontos)
     printf("/** Jogo da Forca **/\n");
     printf("/*******************/\n");
     printf("\nBem vindo(a) %s,",loggedname);
-    printf("\nPontos: %d\n",pontos);
     printf("\n1. P1 VS P2");
     printf("\n2. P1 VS PC");
     printf("\n3. Ver Ranking");
@@ -166,9 +165,10 @@ void menuForca(char loggedname[],int pontos)
     switch(op)
     {
         case '1':
-            //meter aqui a funçao
+            words(loggedname);
             break;
         case '2':
+            printf("Em desenvolvimento");
             break;
         case '3':
             break;
