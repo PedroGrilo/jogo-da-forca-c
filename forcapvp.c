@@ -35,47 +35,21 @@ void words ()
 
         do
         {
-            if(isdigit(forca[i]))
-            {
-                system("cls");
-                strcpy(msg,"\nNao sao aceites numeros, tente novamente!\n");
-                forca[0] = '\0';
-                repetir='r';
-                break;
-            }
-            else if(forca[i]==32)
-            {
-                system("cls");
-                printf("\nNao sao aceites espacos, tente novamente!\n");
-                forca[0] = '\0';
-                repetir='r';
-                break;
-            }
-            else if(forca[i]=='\n')
-            {
-                system("cls");
-                printf("\nNao introduziu nenhuma letra, tente novamente!\n");
-                forca[0] = '\0';
-                repetir='r';
-                break;
-            }
-            else
-            {
                 if(forca[k]==' ')
                 {
                     frase[k]=' ';
                 }
-//            else if(forca[k]<='9'&&forca[k]>='0')
-//            {
-//                forca[0] = '\0';
-//                repetir='r';
-//                break;
-//            }
+            else if(forca[k]<='9'&&forca[k]>='0')
+
+                forca[0] = '\0';
+                repetir='r';
+                break;
+
                 else
                 {
                     frase[k]='_';
                 }
-            }
+
             k++;
         }
         while(k<i);
