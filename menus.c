@@ -159,7 +159,7 @@ void menuForca(char loggedname[])
     printf("\n2. P1 VS PC");
     printf("\n3. Ver Ranking");
     printf("\n4. Sair ");
-    printf("\n\nEscolha uma opção>");
+    printf("\n\nEscolha uma opção>  ");
     scanf(" %c",&op);
 
     switch(op)

@@ -27,3 +27,31 @@
 	<stdlib.h>
 	<string.h>
 
+1545133542 source:c:\users\sala230_pc8_ips\desktop\ctesp\afp\afp-projeto\animacao.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+
+1545134840 source:c:\users\sala230_pc8_ips\desktop\ctesp\afp\afp-projeto\forcapvp.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1545133542 source:c:\users\sala230_pc8_ips\desktop\ctesp\afp\afp-projeto\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<string.h>
+	<ctype.h>
+	"menus.h"
+
+1545133542 c:\users\sala230_pc8_ips\desktop\ctesp\afp\afp-projeto\menus.h
+
+1545135342 source:c:\users\sala230_pc8_ips\desktop\ctesp\afp\afp-projeto\menus.c
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<windows.h>
+	<stdbool.h>
+

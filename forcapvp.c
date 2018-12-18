@@ -24,7 +24,7 @@ void words (char userName[])
 
         if(repetir=='r'&&forca[0]==0)
         {
-            printf("Não são aceites números, tente novamente!\n\n");
+            printf("Não são aceites números nem o enter, tente novamente!\n\n");
         }
         repetir='\0';
         printf("Introduza a sua palavra/frase > ");
@@ -32,50 +32,27 @@ void words (char userName[])
         gets(forca);
         i=strlen(forca);
         system("cls");
+        k=0;
 
         do
         {
-            if(isdigit(forca[i]))
+            if(forca[k]==32)
             {
-                system("cls");
-                strcpy(msg,"\nNao sao aceites numeros, tente novamente!\n");
-                forca[0] = '\0';
-                repetir='r';
-                break;
+                frase[k]=' ';
             }
-            else if(forca[i]==32)
+            else if(forca[k]=='0'||forca[k]=='1'||forca[k]=='2'||forca[k]=='3'||forca[k]=='4'||forca[k]=='5'||forca[k]=='6'||forca[k]=='7'||forca[k]=='8'||forca[k]=='9')
             {
-                system("cls");
-                printf("\nNao sao aceites espacos, tente novamente!\n");
                 forca[0] = '\0';
                 repetir='r';
-                break;
-            }
-            else if(forca[i]=='\n')
-            {
-                system("cls");
-                printf("\nNao introduziu nenhuma letra, tente novamente!\n");
+            }else if(forca[k]=='\n'){
                 forca[0] = '\0';
                 repetir='r';
-                break;
             }
             else
             {
-                if(forca[k]==' ')
-                {
-                    frase[k]=' ';
-                }
-//            else if(forca[k]<='9'&&forca[k]>='0')
-//            {
-//                forca[0] = '\0';
-//                repetir='r';
-//                break;
-//            }
-                else
-                {
-                    frase[k]='_';
-                }
+                frase[k]='_';
             }
+
             k++;
         }
         while(k<i);
@@ -87,7 +64,7 @@ void words (char userName[])
             scanf(" %c",&repetir);
         }
     }
-    while(tolower(repetir)=='s');
+    while(tolower(repetir)=='s'||tolower(repetir)=='r');
     system("cls");
     guesser(forca,frase,userName);
     puts("");
@@ -106,7 +83,7 @@ void guesser(char forca[100],char frase[100],char userName[])
         header(2,msg,falhascount);
         fflush(stdin);
 
-        for (int i=0; i<guesssize; i++)
+        for (i=0; i<guesssize; i++)
             printf("%c ",frase[i]);
 
         puts("\n\nIntroduza uma letra > ");
