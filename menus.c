@@ -239,8 +239,7 @@ void menuForca(USERS p1)
     printf("\n4. Sair ");
     printf("\n\nEscolha uma opção > ");
     fflush(stdin);
-    scanf("%c",&op);
-
+    op=getchar();
     switch(op)
     {
         case '1':

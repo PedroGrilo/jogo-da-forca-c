@@ -24,66 +24,55 @@ void words(USERS p1, USERS p2) {
   char repetir, forca[100], frase[100], msg[100] = {};
   int i = 0, k = 0;
   do {
+
     system("cls");
     printf("/**********************************/\n");
     printf("/** Jogo da Forca - Player %-06s**/\n", p1.nome);
     printf("/**********************************/\n");
-    if (repetir == 'r' && forca[0] == 0) {
-      printf("Não são aceites números, tente novamente!\n\n");
-    }
-    repetir = '\0';
-    printf("Introduza a sua palavra/frase > ");
-    fflush(stdin);
-    gets(forca);
+    do{
+        if(repetir=='r')
+            printf("Verifique que a frase nao contem números nem começa por um espaço nem tem caracteres especiais\n\n");
+        repetir = '\0';
+        printf("Introduza a sua palavra/frase > ");
+        fflush(stdin);
+        gets(forca);
+    }while(forca[0]=='\0');
+
     i = strlen(forca);
     system("cls");
-    do {
-      if (isdigit(forca[i])) {
-        system("cls");
-        strcpy(msg, "\nNao sao aceites numeros, tente novamente!\n");
-        forca[0] = '\0';
-        repetir = 'r';
-        break;
-      } else if (forca[i] == 32) {
-        system("cls");
-        printf("\nNao sao aceites espacos, tente novamente!\n");
-        forca[0] = '\0';
-        repetir = 'r';
-        break;
-      } else if (forca[i] == '\n') {
-        system("cls");
-        printf("\nNao introduziu nenhuma letra, tente novamente!\n");
-        forca[0] = '\0';
-        repetir = 'r';
-        break;
-      } else {
-        if (forca[k] == ' ') {
-          frase[k] = ' ';
+    do{
+        if(forca[0]==' '){
+            repetir='r';
+            break;
+        }else if(forca[k] >= '0' && forca[k] <= '9'){
+            repetir='r';
+            k++;
+            break;
+        }else if((forca[k] >= 'a' && forca[k] <= 'z') || (forca[k] >= 'A' && forca[k] <= 'Z')){
+            if(forca[k]==' '){
+                frase[k]=' ';
+            }else{
+                frase[k]='_';
+            }
+
+        }else{
+            repetir='r';
+            k++;
+            break;
         }
-        //            else if(forca[k]<='9'&&forca[k]>='0')
-        //            {
-        //                forca[0] = '\0';
-        //                repetir='r';
-        //                break;
-        //            }
-        else {
-          frase[k] = '_';
-        }
-      }
-      k++;
-    }
-    while (k < i);
-    frase[k] = '\0';
+        k++;
+    }while(k<i);
     printf("Frase: %s\n\n", forca);
-    if (repetir != 'r') {
-      puts("Deseja alterar a sua frase?[S/N]");
-      scanf(" %c", & repetir);
-    }
-  }
-  while (tolower(repetir) == 's');
+    printf("Deseja alterar a frase? [S/N]\n");
+    fflush(stdin);
+    do{
+    repetir=getchar();}while(tolower(repetir)=='r');
+  }while (tolower(repetir) == 's' || tolower(repetir)=='r');
   system("cls");
-  guesser(forca, frase, p2, p1);
-  puts("");
+  //guesser(forca, frase, p2, p1);
+  for(k=0;k<i;k++){
+    printf("%c",forca[k]);
+  }
 }
 
 void guesser(char forca[100], char frase[100], USERS p2, USERS p1) {
@@ -106,22 +95,23 @@ void guesser(char forca[100], char frase[100], USERS p2, USERS p1) {
     tentativa[i] = getchar();
     strcpy(msg, "");
 
-    if (isdigit(tentativa[i])) {
-      system("cls");
-      strcpy(msg, "\nNao sao aceites numeros, tente novamente!\n");
-      i--;
-      continue;
-    } else if (tentativa[i] == 32) {
-      system("cls");
-      strcpy(msg, "\nNao sao aceites espacos, tente novamente!\n");
-      i--;
-      continue;
-    } else if (tentativa[i] == '\n') {
-      system("cls");
-      strcpy(msg, "\nNao introduziu nenhuma letra, tente novamente!\n");
-      i--;
-      continue;
-    }
+     if(tentativa[0]==32){
+            system("cls");
+            strcpy(msg, "\nNao sao aceites espacos, tente novamente!\n");
+            i--;
+            continue;
+        }else if(tentativa[i] >= '0' && tentativa[i] <= '9'){
+            system("cls");
+            strcpy(msg, "\nNao sao aceites numeros, tente novamente!\n");
+            i--;
+            continue;
+        }else if(!((tentativa[i] >= 'a' && tentativa[i] <= 'z') || (tentativa[i] >= 'A' && tentativa[i] <= 'Z'))){
+            system("cls");
+            strcpy(msg, "\nNao introduziu nenhuma letra, tente novamente!\n");
+            i--;
+            continue;
+        }
+
 
     falha = 1;
     for (k = 0; k < i; k++) {
