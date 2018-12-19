@@ -10,4 +10,5 @@ void vida5();
 void vida6();
 void animacaoperdeu();
 void vida();
+void animation();
 #endif // ANIMACAO_H_INCLUDED

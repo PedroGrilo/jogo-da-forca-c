@@ -3,5 +3,7 @@
 
 void menuPrincipal();
 void menuNovoUtilizador();
-char loginMenu();
+int loginMenu();
+void ranking();
+
 #endif // MENUS_H_INCLUDED

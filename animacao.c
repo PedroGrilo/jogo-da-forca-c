@@ -3,6 +3,21 @@
 #include <string.h>
 #include <locale.h>
 
+void animation(char string[])
+{
+    system("cls");
+    printf("\n\t%s",string);
+    Sleep(200);
+    printf(".");
+    Sleep(200);
+    printf(".");
+    Sleep(200);
+    printf(".\n");
+    Sleep(500);
+}
+
+
+
 void forcadefault()
 {
     printf("   %c%c%c%c%c%c\n",201,205,205,205,205,187);

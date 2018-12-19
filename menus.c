@@ -5,148 +5,226 @@
 #include <stdbool.h>
 #define MAX_CHAR 21
 
-FILE *acc;
-
-struct users
+typedef struct
 {
     char nome[MAX_CHAR];
     char pass[MAX_CHAR];
     int pontos;
-} user;
+} USERS;
+ USERS data,p1,p2;
 
-void animation(char string[])
-{
-    system("cls");
-    printf("\n\t%s",string);
-    Sleep(200);
-    printf(".");
-    Sleep(200);
-    printf(".");
-    Sleep(200);
-    printf(".\n");
-    Sleep(500);
-}
+
+
+FILE *fout;
+FILE *fin;
+
 
 void menuPrincipal()
 {
     char op;
-    do
-    {
-        system("cls");
-        printf("/*******************/\n");
-        printf("/** Jogo da Forca **/\n");
-        printf("/*******************/\n");
-        printf("\n1. Entrar");
-        printf("\n2. Registar");
-        printf("\n3. Sair");
-        printf("\n\nEscolha uma opcão: ");
-        scanf(" %c",&op);
+    system("cls");
+    printf("/*******************/\n");
+    printf("/** Jogo da Forca **/\n");
+    printf("/*******************/\n");
+    printf("\n1. Entrar");
+    printf("\n2. Registar");
+    printf("\n3. Sair");
+    printf("\n\nEscolha uma opcão: ");
+    scanf(" %c",&op);
 
-        switch(op)
-        {
-            case '1':
-                loginMenu();
-                break;
-            case '2':
-                menuNovoUtilizador();
-                break;
-        }
+    switch(op)
+    {
+        case '1':
+            loginMenu();
+            break;
+        case '2':
+            menuNovoUtilizador();
+            break;
+        case '3':
+            printf("\nVolte Sempre\n");
+            exit(1);
     }
-    while(op<'1' || op>'3');
 }
 
 void menuNovoUtilizador()
 {
-    //nao esquecer verificar os nomes iguais
+
+    char nometemp[MAX_CHAR];
+    char passtemp[MAX_CHAR];
+    char passtemp2[MAX_CHAR];
+    int pontos = 200;
+
+    int continuar;
+
     system("cls");
-
-    char nometemp[100];
-    char passtemp[100];
-    char passtemp2[100];
-
-    acc=fopen("users.dat","a+");
-
     printf("/************************************/\n");
     printf("/** Jogo da Forca - Novo utlizador **/\n");
     printf("/************************************/\n");
     printf("\nIntroduza o seu nome: ");
-    scanf("%s",user.nome);
+    fflush(stdin);
+    scanf("%s",nometemp);
     printf("\nIntroduza a sua palavra-passe: ");
-    scanf("%s",passtemp);
-    printf("\nIntroduza novamente a sua palavra-passe: ");
-    scanf("%s",passtemp2);
+    fflush(stdin);
+    gets(passtemp);
+    printf("\nIntroduza a sua palavra-passe novamente: ");
+    fflush(stdin);
+    gets(passtemp2);
 
     animation("A registar");
 
-    char nome[50],pass[50];
-    int userexists=0,pontos;
+    if(!strcmp(passtemp,passtemp2))
+    {
+        fflush(stdin);
+        fin = fopen("users.dat", "a+");
 
-    if(strcmp(passtemp,passtemp2)==0){
-        user.pontos = 0;
-        strcpy(user.pass,passtemp);
+        int userex = 0;
 
-        while(fscanf(acc,"%s\t%s\t%i",nome,pass,&pontos)!=EOF)
-            if(!strcmp(nome,user.nome))
-                userexists = 1;
+        while (!feof(fin))
+        {
+            fread( &p1, sizeof(USERS), 1, fin);
+            if ((!strcmp(nometemp, p1.nome)))
+            {
+                userex = 1;
+                break;
+            }
+        }
 
-        if(userexists == 0){
-            fprintf(acc,"%s\t%s\t%d\n",user.nome,user.pass,user.pontos);
-            if(fprintf != 0){
-                printf("\n\tRegistado com sucesso!\n\n\tPressione qualquer tecla para voltar ao menu principal...");
-            }else
-                printf("\n\tErro ao registar, tente novamente!\n\n\tPressione qualquer tecla para voltar ao menu principal...");
-        }else
-            printf("\n\tErro ao registar, utilizador ja existe!\n\n\tPressione qualquer tecla para voltar ao menu principal...");
-    }else{
-        printf("\n\tERRO: Campo de repetir palavra-passe não é igual à sua Palavra-passe.\n\n\tPressione qualquer tecla para voltar ao menu principal...");
+        fclose(fin);
+
+        if (userex == 0)
+        {
+            fout = fopen("users.dat", "a+");
+
+            strcpy(data.nome, nometemp);
+            strcpy(data.pass, passtemp);
+            data.pontos = pontos;
+
+            fwrite(&data, sizeof(USERS), 1, fout);
+            if (fwrite)
+            {
+                printf("\n\tRegistado com Sucesso, vai ser redirecionado dentro de instantes!\n");
+                Sleep(1000);
+                fclose(fout);
+                menuForca(data);
+            }
+        }
+        else
+        {
+            printf("\n\tUtilizador ja existe, prima qualquer tecla para voltar ao menu principal.");
+            getchar();
+            menuPrincipal();
+        }
+
+    }
+    else
+    {
+        printf("\n\tPalavra-Passe não combinam, prima qualquer tecla para voltar ao menu principal.");
+        getchar();
+        menuPrincipal();
     }
 
-    getch();
-    fclose (acc);
-    menuPrincipal();
 }
 
-void loginMenu()
+int loginMenu()
 {
+    char nometemp[MAX_CHAR];
+    char passtemp[MAX_CHAR];
+    int logged = 0;
 
-    char loggedname[50],nome[50],pass[50];
-    int disponivel=0;
-    acc=fopen("users.dat","r");
-
+    int continuar;
     system("cls");
     printf("/****************************/\n");
     printf("/** Jogo da Forca - Entrar **/\n");
     printf("/****************************/\n");
+    fflush(stdin);
     printf("\nIntroduza o seu nome: ");
-    scanf("%s",user.nome);
-    printf("\nIntroduza a sua palavra-passe: ");
-    scanf("%s",user.pass);
+    gets(nometemp);
 
-    while(fscanf(acc,"%s\t%s\t%i",nome,pass)!=EOF)
-        if(!strcmp(nome,user.nome) && !strcmp(pass,user.pass))
-            disponivel=1;
+    fflush(stdin);
+    printf("\nIntroduza a sua palavra-passe: ");
+    gets(passtemp);
+    fflush(stdin);
+    fin = fopen("users.dat", "a+");
+
 
     animation("A verificar se está correta");
-
-    if(disponivel==0)
+    while (!feof(fin))
     {
-        printf("\n\tSenha incorreta, tente novamente!\n");
+        fread(&p1, sizeof(USERS), 1, fin);
+        if ((!strcmp(nometemp, p1.nome)) && (!strcmp(passtemp, p1.pass)))
+        {
+            logged = 1;
+            break;
+        }
+    }
+    fclose(fin);
+    if(logged ==1)
+    {
+        printf("\n\tEntrou com sucesso na sua conta!\n");
         Sleep(800);
-        strcpy(loggedname,"");
-        menuPrincipal();
-        fclose(acc);
+        menuForca(p1);
     }
     else
     {
-        printf("\n\t Entrou com sucesso na sua conta!\n");
+        printf("\n\tSenha incorreta, tente novamente!\n");
         Sleep(800);
-        strcpy(loggedname,user.nome);
-        menuForca(loggedname);
-        fclose(acc);
+        menuPrincipal();
     }
 }
+int loginp2(){
+    char nometemp[MAX_CHAR];
+    char passtemp[MAX_CHAR];
+    int logged = 0;
 
-void menuForca(char loggedname[])
+    int continuar;
+    system("cls");
+    printf("/*************************************/\n");
+    printf("/** Jogo da Forca - Entrar Player 2 **/\n");
+    printf("/*************************************/\n");
+    fflush(stdin);
+    printf("\nIntroduza o seu nome: ");
+    gets(nometemp);
+
+    fflush(stdin);
+    printf("\nIntroduza a sua palavra-passe: ");
+    gets(passtemp);
+    fflush(stdin);
+    fin = fopen("users.dat", "a+");
+
+
+    animation("A verificar se está correta");
+    while (!feof(fin))
+    {
+        fread(&p2, sizeof(USERS), 1, fin);
+        if ((!strcmp(nometemp, p2.nome)) && (!strcmp(passtemp, p2.pass)))
+        {
+            if((strcmp(p2.nome,p1.nome))){
+            logged = 1;
+            break;
+            }else
+            logged = 2;
+        }
+    }
+    fclose(fin);
+    if(logged ==1)
+    {
+        printf("\n\tEntrou com sucesso na sua conta!\n");
+        Sleep(1000);
+        return 1;
+    }
+    else if(logged==2){
+        printf("\n\tA conta nao pode ser a mesma do player 1...");
+        Sleep(1000);
+        return 0;
+    }
+    else
+    {
+        printf("\n\tSenha incorreta, tente novamente!\n");
+        Sleep(1000);
+        return 0;
+    }
+}
+void menuForca(USERS p1)
 {
     char op;
 
@@ -154,33 +232,74 @@ void menuForca(char loggedname[])
     printf("/*******************/\n");
     printf("/** Jogo da Forca **/\n");
     printf("/*******************/\n");
-    printf("\nBem vindo(a) %s,",loggedname);
+    printf("\nBem vindo(a) %s",p1.nome);
     printf("\n1. P1 VS P2");
     printf("\n2. P1 VS PC");
     printf("\n3. Ver Ranking");
     printf("\n4. Sair ");
-    printf("\n\nEscolha uma opção>  ");
-    scanf(" %c",&op);
+    printf("\n\nEscolha uma opção > ");
+    fflush(stdin);
+    scanf("%c",&op);
 
     switch(op)
     {
         case '1':
-            words(loggedname);
+            if(loginp2()==1)
+            words(p1,p2);
+            else
+            menuForca(p1);
             break;
         case '2':
             printf("Em desenvolvimento");
             break;
         case '3':
+            ranking(p1);
             break;
         case '4':
             menuPrincipal();
             break;
-            if(op < '1' || op > '4')
-            {
-                system("cls");
-                printf("\nOpção Errada\n\n");
-            }
+        default:
+            printf("\nOpção Errada!Qualquer tecla para tentar novamente\n");
+            fflush(stdin);
+            getchar();
+            menuForca(p1);
+
     }
 }
+void ranking(USERS p1)
+{
+    char op='0';
+
+    system("cls");
+    printf("/*******************/\n");
+    printf("/***** Ranking *****/\n");
+    printf("/*******************/\n");
+    printf("\n1. Ver ranking P1 VS PC");
+    printf("\n2. Ver ranking P1 VS P2");
+    printf("\n0. Voltar");
+    printf("\n\nEscolha uma opção >");
+    fflush(stdin);
+    scanf("%c",&op);
+
+
+    switch (op)
+    {
+        case '1':
+            printf("\nVersão em desenvolvimento\n\nPressione qualquer tecla para voltar ao menu...\n");
+            fflush(stdin);
+            getchar();
+            menuForca(p1);
+            break;
+        case '2':
+        //rankpvp();break;
+
+        case '0':
+            menuForca(p1);
+        default:
+            ranking(p1);
+    }
+
+}
+
 
 

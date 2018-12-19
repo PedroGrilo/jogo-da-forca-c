@@ -4,12 +4,12 @@
 #include <string.h>
 #include <ctype.h>
 #include "menus.h"
+#define MAX_CHAR 21
+
 
 int main()
 {
-
     system("color F0");
-    setlocale(LC_ALL,"");
     menuPrincipal();
      return 0;
 }
