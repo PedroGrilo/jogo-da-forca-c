@@ -9,7 +9,7 @@
 
 int main()
 {
-    setlocale(LC_ALL,"Portuguese");
+    setlocale(LC_ALL,"portuguese");
     system("color F0");
     menuPrincipal();
      return 0;

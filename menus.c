@@ -28,7 +28,7 @@ void menuPrincipal()
     printf("/*******************/\n");
     printf("\n1. Entrar");
     printf("\n2. Registar");
-    printf("\n3. Sair");
+    printf("\n0. Sair");
     printf("\n\nEscolha uma opcão: ");
     scanf(" %c",&op);
 
@@ -40,7 +40,7 @@ void menuPrincipal()
         case '2':
             menuNovoUtilizador();
             break;
-        case '3':
+        case '0':
             printf("\nVolte Sempre\n");
             exit(1);
     }
@@ -52,7 +52,7 @@ void menuNovoUtilizador()
     char nometemp[MAX_CHAR];
     char passtemp[MAX_CHAR];
     char passtemp2[MAX_CHAR];
-    int pontos = 200;
+    int pontos = 0;
 
     int continuar;
 
@@ -82,7 +82,7 @@ void menuNovoUtilizador()
         while (!feof(fin))
         {
             fread( &p1, sizeof(USERS), 1, fin);
-            if ((!strcmp(nometemp, p1.nome)))
+            if ( (!strcmp(nometemp, p1.nome)) )
             {
                 userex = 1;
                 break;
@@ -111,6 +111,7 @@ void menuNovoUtilizador()
         else
         {
             printf("\n\tUtilizador ja existe, prima qualquer tecla para voltar ao menu principal.");
+            fclose(fout);
             getchar();
             menuPrincipal();
         }
@@ -236,7 +237,7 @@ void menuForca(USERS p1)
     printf("\n1. P1 VS P2");
     printf("\n2. P1 VS PC");
     printf("\n3. Ver Ranking");
-    printf("\n4. Sair ");
+    printf("\n0. Sair ");
     printf("\n\nEscolha uma opção > ");
     fflush(stdin);
     op=getchar();
@@ -250,11 +251,12 @@ void menuForca(USERS p1)
             break;
         case '2':
             printf("Em desenvolvimento");
+            menuForca(p1);
             break;
         case '3':
             ranking(p1);
             break;
-        case '4':
+        case '0':
             menuPrincipal();
             break;
         default:
@@ -290,7 +292,7 @@ void ranking(USERS p1)
             menuForca(p1);
             break;
         case '2':
-        //rankpvp();break;
+            rankpvp(); break;
 
         case '0':
             menuForca(p1);
@@ -300,5 +302,40 @@ void ranking(USERS p1)
 
 }
 
+void rankpvp(){
+    system("cls");
+    printf("/*******************/\n");
+    printf("/***** Ranking *****/\n");
+    printf("/*******************/\n");
+    printf("\n%-5s %04d pontos\n\n",strcat(p1.nome,":"),p1.pontos);
+    printf("*******HIGHSCORES*******\n");
+     typedef struct
+    {
+        char nome[21];
+        char pass[21];
+        int pontos;
+    }reader;
+    reader data,buffer;
+
+    FILE * getpoints;
+    long int recsize;
+
+    getpoints=fopen("users.dat","r");
+    rewind(getpoints);
+    strcpy(data.nome,p2.nome);
+    strcpy(data.pass,p2.pass);
+    recsize=sizeof(reader);
+    while (!feof(getpoints))
+    {
+        if(!(fread(&data,recsize,1,getpoints))){
+            break;
+        }else{
+            printf("\n%-5s %04d pontos\n",strcat(data.nome,":"),data.pontos);
+        }
+    }
+    fclose(getpoints);
+    system("pause");
+    ranking(p1);
+}
 
 

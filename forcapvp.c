@@ -11,7 +11,13 @@ typedef struct
 USERS;
 
 loginMenu();
+int isvogal(char letra){
 
+    if(letra=='a'||letra=='e'||letra=='i'||letra=='o'||letra=='u')
+        return 1;
+    else
+        return 0;
+}
 
 void header(char nome[], char msg[], int vidas)
 {
@@ -94,6 +100,16 @@ void guesser(char forca[100], char frase[100], USERS p2, USERS p1)
         fflush(stdin);
         scanf("%c",&tentativa[i]);
         strcpy(msg, "");
+
+        for(k=0;k<3;k++){
+            if(isvogal(tentativa[k])==1){
+                system("cls");
+                strcpy(msg, "\nNao sao aceites vogais até à terceira ronda, tente novamente!\n");
+                i--;
+                continue;
+            }
+        }
+        k=0;
         if (isdigit(tentativa[i]))
         {
             system("cls");
@@ -157,6 +173,7 @@ void guesser(char forca[100], char frase[100], USERS p2, USERS p1)
                 system("cls");
                 header(p1.nome, msg, 7);
                 printf("Perdeu o jogo (%s) contra o Player '%s' !!\n", p1.nome, p2.nome);
+                savepoints(falhascount,p1,guesssize);
                 printf("\n\nDeseja voltar ao menu?[S/N]");
                 getchar();
                 scanf(" %c", & voltar);
@@ -171,7 +188,7 @@ void guesser(char forca[100], char frase[100], USERS p2, USERS p1)
                 system("cls");
                 header(p2.nome, msg, 8);
                 printf("Ganhou o jogo (%s) contra o Player '%s' !!\n Ganhou ", p2.nome, p1.nome);
-                savepoints(falhascount,p2); //mudar
+                savepoints(falhascount,p2,guesssize); //mudar
                 printf("\nDeseja voltar ao menu?[S/N]");
                 getchar();
                 scanf(" %c", & voltar);
@@ -186,47 +203,75 @@ void guesser(char forca[100], char frase[100], USERS p2, USERS p1)
     }
     while (i < 26);
 }
-void savepoints(int erros, USERS p2)
+void savepoints(int erros, USERS p2,int stringlength)
 {
 
+    typedef struct
+    {
+        char nome[21];
+        char pass[21];
+        int pontos;
+    }reader;
+    reader usersubdata,buffer;
+
     FILE * getpoints;
+    long int recsize;
+
 
     int pontos[7] = {10,8,6,4,3,2,0};
-
+    usersubdata.pontos=p2.pontos;
     switch (erros)
     {
-        case 0:
-            printf("10 pontos\n");
-            p2.pontos += 10;
+        case 0 :
+            printf("%d pontos\n",(10 ));
+            usersubdata.pontos += (10 );
             break;
         case 1:
-            printf("8 pontos\n");
-            p2.pontos += 8;
+            printf("%d pontos\n",(8 ));
+            usersubdata.pontos += (8 );
             break;
         case 2:
-            printf("6 pontos\n");
-            p2.pontos += 6;
+            printf("%d pontos\n",(6 ));
+            usersubdata.pontos += (6 );
             break;
         case 3:
-            printf("4 pontos\n");
-            p2.pontos += 4;
+            printf("%d pontos\n",(4 ));
+            usersubdata.pontos += (4 );
             break;
         case 4:
-            printf("3 pontos\n");
-            p2.pontos += 3;
+            printf("%d pontos\n",(3));
+            usersubdata.pontos += (3);
             break;
         case 5:
-            printf("2 pontos\n");
-            p2.pontos += 2;
+            printf("2 pontos\n",(2 ));
+            usersubdata.pontos += (2 );
             break;
         default:
-            printf("0 pontos\n");
+            printf("%d pontos\n",(0 ));
+            usersubdata.pontos += (0 );
+            break;
     }
+
+    printf("Para um total de %d pontos!",usersubdata.pontos);
+    getpoints=fopen("users.dat","rb+");
+    rewind(getpoints);
+    strcpy(usersubdata.nome,p2.nome);
+    strcpy(usersubdata.pass,p2.pass);
+    recsize=sizeof(reader);
+    while(fread(&buffer,recsize,1,getpoints)==1){
+        if(strcmp(buffer.nome,p2.nome)==0){
+                fseek(getpoints,-recsize,SEEK_CUR);
+                fflush(getpoints);
+                fwrite(&usersubdata,recsize,1,getpoints);
+                break;
+        }
+    }
+    fclose(getpoints);
 }
 
 
 int verificacoes(char nome[]){
-    if(strlen(nome)<=3)
+    if(strlen(nome)<3)
     {
         printf("A frase NÃO pode conter menos de 3 caracteres\n\n");
         return 1;
