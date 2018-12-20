@@ -3,7 +3,7 @@
 
 void words();
 void guesser();
-
+void verificacoes();
 
 
 #endif // FORCAPVP_H_INCLUDED

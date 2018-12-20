@@ -16,89 +16,106 @@ void animation(char string[])
     Sleep(500);
 }
 
-
-
 void forcadefault()
 {
-    printf("   %c%c%c%c%c%c\n",201,205,205,205,205,187);
-    printf("   %c\n",186);
-    printf("   %c\n",186);
-    printf("   %c\n",186);
-    printf(" %c%c%c%c%c\n",205,205,202,205,205);
+    printf("    ________\n");
+    printf("   |/       |\n");
+    printf("   |\n");
+    printf("   |\n");
+    printf("   |\n");
+    printf("   |\n");
+    printf("___|___\n");
 }
 void vida1()
 {
-    printf("   %c%c%c%c%c%c\n",201,205,205,205,205,187);
-    printf("   %c    O\n",186);
-    printf("   %c    \n",186);
-    printf("   %c\n",186);
-    printf(" %c%c%c%c%c\n",205,205,202,205,205);
-
+    printf("    ________\n");
+    printf("   |/       |\n");
+    printf("   |        0\n");
+    printf("   |\n");
+    printf("   |\n");
+    printf("   |\n");
+    printf("___|___\n");
 }
 void vida2()
 {
-    printf("   %c%c%c%c%c%c\n",201,205,205,205,205,187);
-    printf("   %c    O\n",186);
-    printf("   %c    |\n",186);
-    printf("   %c\n",186);
-    printf(" %c%c%c%c%c\n",205,205,202,205,205);
-}
+
+    printf("    ________\n");
+    printf("   |/       |\n");
+    printf("   |        0\n");
+    printf("   |        |\n");
+    printf("   |\n");
+    printf("   |\n");
+    printf("___|___\n");
+   }
+
 void vida3()
 {
-    printf("   %c%c%c%c%c%c\n",201,205,205,205,205,187);
-    printf("   %c   \\O\n",186);
-    printf("   %c    |\n",186);
-    printf("   %c\n",186);
-    printf(" %c%c%c%c%c\n",205,205,202,205,205);
-}
+    printf("    ________\n");
+    printf("   |/       |\n");
+    printf("   |        0\n");
+    printf("   |       /|\n");
+    printf("   |\n");
+    printf("   |\n");
+    printf("___|___\n");
+   }
 void vida4()
 {
-    printf("   %c%c%c%c%c%c\n",201,205,205,205,205,187);
-    printf("   %c   \\O/\n",186);
-    printf("   %c    |\n",186);
-    printf("   %c\n",186);
-    printf(" %c%c%c%c%c\n",205,205,202,205,205);
+    printf("    ________\n");
+    printf("   |/       |\n");
+    printf("   |        0\n");
+    printf("   |       /|\\\n");
+    printf("   |\n");
+    printf("   |\n");
+    printf("___|___\n");
 }
 
 void vida5()
 {
-    printf("   %c%c%c%c%c%c\n",201,205,205,205,205,187);
-    printf("   %c   \\O/\n",186);
-    printf("   %c    |\n",186);
-    printf("   %c   /\n",186);
-    printf(" %c%c%c%c%c\n",205,205,202,205,205);
-}
+
+    printf("    ________\n");
+    printf("   |/       |\n");
+    printf("   |        0\n");
+    printf("   |       /|\\\n");
+    printf("   |       /\n");
+    printf("   |\n");
+    printf("___|___\n");}
 void vida6()
 {
-    printf("   %c%c%c%c%c%c\n",201,205,205,205,205,187);
-    printf("   %c   \\O/\n",186);
-    printf("   %c    |\n",186);
-    printf("   %c   / \\\n",186);
-    printf(" %c%c%c%c%c\n",205,205,202,205,205);
-}
+    printf("    ________\n");
+    printf("   |/       |\n");
+    printf("   |        0\n");
+    printf("   |       /|\\\n");
+    printf("   |       / \\\n");
+    printf("   |\n");
+    printf("___|___\n");
+    }
 void animacaoperdeu()
 {
     int i = 0;
     while(i<=3)
     {
         system("cls");
-        printf("%c%c%c%c%c-RESULTADO-%c%c%c%c%c\n",205,205,205,205,205,205,205,205,205,205);
-        printf("   %c%c%c%c%c%c\n",201,205,205,205,205,187);
-        printf("   %c   \\O/\n",186);
-        printf("   %c    |\n",186);
-        printf("   %c   / \\\n",186);
-        printf(" %c%c%c%c%c\n",205,205,202,205,205);
-        Sleep(200);
+        printf(" * * * RESULTADO * * *\n");
+        printf("    ________\n");
+        printf("   |/       |\n");
+        printf("   |        0\n");
+        printf("   |       /|\\\n");
+        printf("   |       / \\\n");
+        printf("   |\n");
+        printf("___|___\n");
+            Sleep(200);
         system("cls");
 
-        printf("%c%c%c%c%c-RESULTADO-%c%c%c%c%c\n",205,205,205,205,205,205,205,205,205,205);
-        printf("   %c%c%c%c%c%c\n",201,205,205,205,205,187);
-        printf("   %c    \O\n",186);
-        printf("   %c   /|\\\n",186);
-        printf("   %c   / \\\n",186);
-        printf(" %c%c%c%c%c\n",205,205,202,205,205);
-        Sleep(200);
-        i++;
+
+        printf("       RESULTADO      \n");
+        printf("    ________\n");
+        printf("   |/       |\n");
+        printf("   |       \\0/\n");
+        printf("   |        |\n");
+        printf("   |       / \\\n");
+        printf("   |\n");
+        printf("___|___\n");i++;
+     Sleep(200);
     }
 }
 void win()
@@ -107,19 +124,18 @@ void win()
     while (i<=5)
     {
         system("cls");
-        printf("\t%c%c%c%c%c-RESULTADO-%c%c%c%c%c\n",205,205,205,205,205,205,205,205,205,205);
-        printf("\n\t* * * PARABENS! * * *\n");
+        printf("\t       RESULTADO      \n");
+        printf("\n\t * * * PARABENS! * * *\n");
         Sleep(200);
         system("cls");
-        printf("\t%c%c%c%c%c-RESULTADO-%c%c%c%c%c\n",205,205,205,205,205,205,205,205,205,205);
-        printf("\n\t      PARABENS!      \n");
+        printf("\t * * * RESULTADO * * *\n");
+        printf("\n\t       PARABENS!      \n");
         Sleep(200);
         i++;
     }
     system("cls");
-    printf("\t%c%c%c%c%c-RESULTADO-%c%c%c%c%c\n",205,205,205,205,205,205,205,205,205,205);
-    printf("\n\t* * * PARABENS! * * *\n");
-}
+        printf("\t       RESULTADO      \n");
+        printf("\n\t * * * PARABENS! * * *\n");}
 
 void vida(int vida)
 {
