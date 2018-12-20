@@ -170,7 +170,7 @@ void vida(int vida)
             win(); ///senao - ganhou
     }
 
-    if(vida<5)
+    if(vida<6)
     {
         printf("RESTAM %d VIDA(S)",6-vida);
     }

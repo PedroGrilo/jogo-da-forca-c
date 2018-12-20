@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#define maxforca 100
 typedef struct
 {
     char nome[21];
@@ -19,20 +19,25 @@ int isvogal(char letra){
         return 0;
 }
 
-void header(char nome[], char msg[], int vidas)
+void header(char nome[], char msg[], int vidas,char tentativas[],int i)
 {
+    int k=0;
     system("cls");
     printf("/**********************************/\n");
     printf("/** Jogo da Forca - Player %-06s**/\n", nome);
     printf("/**********************************/\n");
     vida(vidas);
+    printf("\nLetras ja usadas: ");
+    for(k=0;k<i;k++)
+        printf("%c ",tentativas[k]);
+    printf("\n");
     puts(msg);
 
 }
 
 void words(USERS p1, USERS p2)
 {
-    char repetir, forca[100], frase[100], msg[100] = {};
+    char repetir, forca[maxforca], frase[maxforca], msg[maxforca] = {};
     int i = 0, k = 0;
     do
     {
@@ -78,10 +83,10 @@ void words(USERS p1, USERS p2)
     system("cls");
     guesser(forca, frase, p2, p1);
 }
-void guesser(char forca[100], char frase[100], USERS p2, USERS p1)
+void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1)
 {
 
-    char tentativa[26], falhas[6], msg[100] = {}, voltar;
+    char tentativa[26], falhas[6], msg[maxforca] = {}, voltar;
     int i = 0, k = 0, samechar = 0, guesssize = strlen(forca), falha = 1, falhascount = 0, counter = 0;
     do
     {
@@ -90,17 +95,17 @@ void guesser(char forca[100], char frase[100], USERS p2, USERS p1)
         if (samechar != 1)
             system("cls");
 
-        header(p2.nome, msg, falhascount);
+        header(p2.nome, msg, falhascount,tentativa,i);
         fflush(stdin);
 
         for (int i = 0; i < guesssize; i++)
             printf("%c ", frase[i]);
-
-        puts("\n\nIntroduza uma letra > ");
+        if(falhascount!=8){
+        puts("\n\nIntroduza uma letra 0-Desistir > ");
         fflush(stdin);
         scanf("%c",&tentativa[i]);
         strcpy(msg, "");
-
+        if(i!=0){
         for(k=0;k<3;k++){
             if(isvogal(tentativa[k])==1){
                 system("cls");
@@ -110,33 +115,32 @@ void guesser(char forca[100], char frase[100], USERS p2, USERS p1)
             }
         }
         k=0;
-        if (isdigit(tentativa[i]))
-        {
+        }else if(isvogal(tentativa[0])){
+
             system("cls");
-            strcpy(msg, "\nNao sao aceites numeros, tente novamente!\n");
-            i--;
+            strcpy(msg, "\nNao sao aceites vogais até à terceira ronda, tente novamente!\n");
             continue;
         }
-        else if (tentativa[i] == 32)
-        {
+        if (isdigit(tentativa[i])){
+            if(tentativa[i]!='0'){
+                system("cls");
+                strcpy(msg, "\nNao sao aceites numeros, tente novamente!\n");
+                i--;
+                continue;
+            }else{
+                falhascount = 8;
+            }
+        }
+        else if (!((tolower(tentativa[i]) >=97 && tolower(tentativa[i]) <= 122)|| tentativa[i]==32)){
             system("cls");
             strcpy(msg, "\nNao sao aceites espacos, tente novamente!\n");
             i--;
             continue;
-        }
-        else if (tentativa[i] == '\n')
-        {
-            system("cls");
-            strcpy(msg, "\nNao introduziu nenhuma letra, tente novamente!\n");
-            i--;
-            continue;
-        }
-
-        falha = 1;
+        }else{
 
         for (k = 0; k < i; k++)
         {
-            if (tentativa[i] == tentativa[k])
+            if (tolower(tentativa[i]) == tolower(tentativa[k]))
             {
                 system("cls");
                 strcpy(msg, "\nERRO: Esse caracter já foi introduzido\n");
@@ -151,6 +155,11 @@ void guesser(char forca[100], char frase[100], USERS p2, USERS p1)
             }
 
         }
+
+        }
+        falha = 1;
+
+
 
 
         if (samechar == 0)
@@ -168,12 +177,11 @@ void guesser(char forca[100], char frase[100], USERS p2, USERS p1)
                 falhas[falhascount] = tentativa[i];
                 falhascount++;
             }
-            else if (falhascount >= 5)
+            else if (falhascount > 5)
             {
                 system("cls");
-                header(p1.nome, msg, 7);
+                header(p1.nome, msg, 7,tentativa,i);
                 printf("Perdeu o jogo (%s) contra o Player '%s' !!\n", p1.nome, p2.nome);
-                savepoints(falhascount,p1,guesssize);
                 printf("\n\nDeseja voltar ao menu?[S/N]");
                 getchar();
                 scanf(" %c", & voltar);
@@ -186,7 +194,7 @@ void guesser(char forca[100], char frase[100], USERS p2, USERS p1)
             if (strcmp(forca, frase) == 0) //player 2
             {
                 system("cls");
-                header(p2.nome, msg, 8);
+                header(p2.nome, msg, 8,tentativa,i);
                 printf("Ganhou o jogo (%s) contra o Player '%s' !!\n Ganhou ", p2.nome, p1.nome);
                 savepoints(falhascount,p2,guesssize); //mudar
                 printf("\nDeseja voltar ao menu?[S/N]");
@@ -200,6 +208,19 @@ void guesser(char forca[100], char frase[100], USERS p2, USERS p1)
             }
         }
         i++;
+        }else{
+                system("cls");
+                header(p1.nome, msg, 7,tentativa,i);
+                printf("Perdeu o jogo (%s) contra o Player '%s' !!\n", p1.nome, p2.nome);
+                printf("\n\nDeseja voltar ao menu?[S/N]");
+                getchar();
+                scanf(" %c", & voltar);
+                if (tolower(voltar) == 's')
+                    menuForca(p1);
+                else
+                    printf("\nVolte sempre");
+                exit(1);
+        }
     }
     while (i < 26);
 }
