@@ -101,40 +101,25 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1)
 
         for (int i = 0; i < guesssize; i++)
             printf("%c ", frase[i]);
-        if(falhascount!=8)
+        if(falhascount!=8 && falhascount!=6)
         {
             puts("\n\nIntroduza uma letra 0-Desistir > ");
             fflush(stdin);
             scanf("%c",&tentativa[i]);
             strcpy(msg, "");
-            if(i!=0)
+            if(i<2 && isvogal(tentativa[i]))
             {
-                for(k=0; k<3; k++)
-                {
-                    if(isvogal(tentativa[k])==1)
-                    {
-                        system("cls");
-                        strcpy(msg, "\nNao sao aceites vogais até à terceira ronda, tente novamente!\n");
-                        i--;
-                        continue;
-                    }
-                }
-                k=0;
-            }
-            else if(isvogal(tentativa[0]))
-            {
-
                 system("cls");
                 strcpy(msg, "\nNao sao aceites vogais até à terceira ronda, tente novamente!\n");
                 continue;
             }
+
             if (isdigit(tentativa[i]))
             {
                 if(tentativa[i]!='0')
                 {
                     system("cls");
                     strcpy(msg, "\nNao sao aceites numeros, tente novamente!\n");
-                    i--;
                     continue;
                 }
                 else
@@ -142,11 +127,17 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1)
                     falhascount = 8;
                 }
             }
+            if(tentativa[i]==' '){
+                system("cls");
+                    strcpy(msg, "\nNao sao aceites espacos, tente novamente!\n");
+
+                    continue;
+            }
             else if (!((tolower(tentativa[i]) >=97 && tolower(tentativa[i]) <= 122)|| tentativa[i]==32))
             {
                 system("cls");
-                strcpy(msg, "\nNao sao aceites espacos, tente novamente!\n");
-                i--;
+                strcpy(msg, "\nNao sao aceites caracteres especiais, tente novamente!\n");
+
                 continue;
             }
             else
@@ -185,12 +176,12 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1)
                         falha = 0;
                     }
                 }
-                if (falha == 1 && falhascount < 5 && samechar == 0) //player 1
+                if (falha == 1 && falhascount < 6 && samechar == 0) //player 1
                 {
                     falhas[falhascount] = tentativa[i];
                     falhascount++;
                 }
-                else if (falhascount > 5)
+                else if (falhascount > 6)
                 {
                     system("cls");
                     header(p1.nome, msg, 7,tentativa,i);
@@ -211,7 +202,7 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1)
                     printf("Ganhou o jogo (%s) contra o Player '%s' !!\n Ganhou ", p2.nome, p1.nome);
                     savepoints(falhascount,p2,guesssize); //mudar
                     printf("\nDeseja voltar ao menu?[S/N]");
-                    getchar();
+                    fflush(stdin);
                     scanf(" %c", & voltar);
                     if (tolower(voltar) == 's')
                         menuForca(p1);
@@ -228,7 +219,7 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1)
             header(p1.nome, msg, 7,tentativa,i);
             printf("Perdeu o jogo (%s) contra o Player '%s' !!\n", p1.nome, p2.nome);
             printf("\n\nDeseja voltar ao menu?[S/N]");
-            getchar();
+            fflush(stdin);
             scanf(" %c", & voltar);
             if (tolower(voltar) == 's')
                 menuForca(p1);

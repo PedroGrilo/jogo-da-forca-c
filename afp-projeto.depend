@@ -59,18 +59,18 @@
 	<windows.h>
 	<stdbool.h>
 
-1545333342 source:c:\users\joaop\desktop\ctesp\afp\afp-projeto\animacao.c
+1545411271 source:c:\users\joaop\desktop\ctesp\afp\afp-projeto\animacao.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<locale.h>
 
-1545339751 source:c:\users\joaop\desktop\ctesp\afp\afp-projeto\forcapvp.c
+1545411786 source:c:\users\joaop\desktop\ctesp\afp\afp-projeto\forcapvp.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1545317223 source:c:\users\joaop\desktop\ctesp\afp\afp-projeto\main.c
+1545411271 source:c:\users\joaop\desktop\ctesp\afp\afp-projeto\main.c
 	<stdio.h>
 	<stdlib.h>
 	<locale.h>
@@ -78,9 +78,9 @@
 	<ctype.h>
 	"menus.h"
 
-1545241233 c:\users\joaop\desktop\ctesp\afp\afp-projeto\menus.h
+1545411271 c:\users\joaop\desktop\ctesp\afp\afp-projeto\menus.h
 
-1545334359 source:c:\users\joaop\desktop\ctesp\afp\afp-projeto\menus.c
+1545411271 source:c:\users\joaop\desktop\ctesp\afp\afp-projeto\menus.c
 	<string.h>
 	<stdlib.h>
 	<stdio.h>
