@@ -95,13 +95,13 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1)
         fflush(stdin);
         if (samechar != 1)
             system("cls");
-
-        header(p2.nome, msg, falhascount,tentativa,i);
+        if(falhascount!=7 && falhascount!=6)
+            header(p2.nome, msg, falhascount,tentativa,i);
         fflush(stdin);
 
         for (int i = 0; i < guesssize; i++)
             printf("%c ", frase[i]);
-        if(falhascount!=8 && falhascount!=6)
+        if(falhascount!=7 && falhascount!=6)
         {
             puts("\n\nIntroduza uma letra 0-Desistir > ");
             fflush(stdin);
@@ -124,7 +124,10 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1)
                 }
                 else
                 {
-                    falhascount = 8;
+                    system("cls");
+                    strcpy(msg, "\n");
+                    falhascount = 7;
+                    continue;
                 }
             }
             if(tentativa[i]==' '){
