@@ -11,13 +11,10 @@ typedef struct
     char pass[MAX_CHAR];
     int pontos;
 } USERS;
- USERS data,p1,p2;
-
-
+USERS data,p1,p2;
 
 FILE *fout;
 FILE *fin;
-
 
 void menuPrincipal()
 {
@@ -102,16 +99,16 @@ void menuNovoUtilizador()
             fwrite(&data, sizeof(USERS), 1, fout);
             if (fwrite)
             {
-                printf("\n\tRegistado com Sucesso, vai ser redirecionado dentro de instantes!\n");
-                Sleep(1000);
                 fclose(fout);
-                menuForca(data);
+                printf("\n\tRegistado com Sucesso, prima qualquer tecla para voltar ao menu principal.\n");
+                getchar();
+                menuPrincipal();
             }
         }
         else
         {
-            printf("\n\tUtilizador ja existe, prima qualquer tecla para voltar ao menu principal.");
             fclose(fout);
+            printf("\n\tUtilizador ja existe, prima qualquer tecla para voltar ao menu principal.");
             getchar();
             menuPrincipal();
         }
@@ -145,7 +142,7 @@ int loginMenu()
     printf("\nIntroduza a sua palavra-passe: ");
     gets(passtemp);
     fflush(stdin);
-    fin = fopen("users.dat", "a+");
+    fin = fopen("users.dat", "ab+");
 
 
     animation("A verificar se está correta");
@@ -172,7 +169,8 @@ int loginMenu()
         menuPrincipal();
     }
 }
-int loginp2(){
+int loginp2()
+{
     char nometemp[MAX_CHAR];
     char passtemp[MAX_CHAR];
     int logged = 0;
@@ -190,7 +188,7 @@ int loginp2(){
     printf("\nIntroduza a sua palavra-passe: ");
     gets(passtemp);
     fflush(stdin);
-    fin = fopen("users.dat", "a+");
+    fin = fopen("users.dat", "ab+");
 
 
     animation("A verificar se está correta");
@@ -199,11 +197,15 @@ int loginp2(){
         fread(&p2, sizeof(USERS), 1, fin);
         if ((!strcmp(nometemp, p2.nome)) && (!strcmp(passtemp, p2.pass)))
         {
-            if((strcmp(p2.nome,p1.nome))){
-            logged = 1;
-            break;
-            }else
-            logged = 2;
+            if((strcmp(p2.nome,p1.nome)))
+            {
+                logged = 1;
+                break;
+            }
+            else
+            {
+                logged = 2;
+            }
         }
     }
     fclose(fin);
@@ -213,7 +215,8 @@ int loginp2(){
         Sleep(1000);
         return 1;
     }
-    else if(logged==2){
+    else if(logged==2)
+    {
         printf("\n\tA conta nao pode ser a mesma do player 1...");
         Sleep(1000);
         return 0;
@@ -245,9 +248,9 @@ void menuForca(USERS p1)
     {
         case '1':
             if(loginp2()==1)
-            words(p1,p2);
+                words(p1,p2);
             else
-            menuForca(p1);
+                menuForca(p1);
             break;
         case '2':
             printf("Em desenvolvimento");
@@ -292,73 +295,102 @@ void ranking(USERS p1)
             menuForca(p1);
             break;
         case '2':
-            rankpvp(); break;
-
+            rankpvp();
+            break;
         case '0':
             menuForca(p1);
+            break;
         default:
             ranking(p1);
     }
 
 }
 
-void rankpvp(){
+void rankpvp()
+{
     int i=0;
 
 
-     typedef struct
+    typedef struct
     {
         char nome[21];
         char pass[21];
         int pontos;
-    }reader;
+    } reader;
     reader data,buffer[200],temp;
 
     FILE * getpoints;
-    long int recsize;
 
+    getpoints=fopen("users.dat","rb");
 
-    system("cls");
-    printf("/*******************/\n");
-    printf("/***** Ranking *****/\n");
-    printf("/*******************/\n");
-    printf("\n%s%s\t\t%04d pontos\n\n",p1.nome,":",p1.pontos);
-    printf("*****HIGHSCORES*****\n");
-
-    getpoints=fopen("users.dat","r");
-    rewind(getpoints);
-    strcpy(data.nome,p2.nome);
-    strcpy(data.pass,p2.pass);
-    recsize=sizeof(reader);
-    while (!feof(getpoints))
+    if(getpoints==NULL)
     {
-        if(!(fread(&data,recsize,1,getpoints))){
-            break;
-        }else{
-            buffer[i] = data;
-        }
-        i++;
-
+        printf("Erro ao abrir ficheiro, saia do jogo e volte a inicia-lo\n\n");
+        getchar();
     }
+    else
+    {
 
-    for(int n=0;n<i-1;n++){
-        for(int t=0;t<(i-1-n);t++){
-            if(buffer[t].pontos<buffer[t+1].pontos){
-                temp=buffer[t];
-                buffer[t]=buffer[t+1];
-                buffer[t+1]=temp;
+        long int recsize;
 
+
+        system("cls");
+        printf("/***************************/\n");
+        printf("/********* Ranking *********/\n");
+        printf("/***************************/\n");
+        printf("\n Nome:\t\tPontos:\n");
+        printf("\n %s%s\t\t%04d\n\n",p1.nome,":",p1.pontos);
+        printf("*** HIGHSCORES -- TOP 10 ***\n\n");
+
+        rewind(getpoints);
+        strcpy(data.nome,p2.nome);
+        strcpy(data.pass,p2.pass);
+
+        recsize=sizeof(reader);
+
+        while (!feof(getpoints))
+        {
+            if(!(fread(&data,recsize,1,getpoints)))
+            {
+                break;
+            }
+            else
+            {
+                buffer[i] = data;
+            }
+            i++;
+
+        }
+
+        for(int n=0; n<i-1; n++)
+        {
+            for(int t=0; t<(i-1-n); t++)
+            {
+                if(buffer[t].pontos<buffer[t+1].pontos)
+                {
+                    temp=buffer[t];
+                    buffer[t]=buffer[t+1];
+                    buffer[t+1]=temp;
+
+                }
             }
         }
+        if(i<10)
+        {
+            printf("É preciso no mínimo 10 players estarem registados!\n")
+            ;
+        }
+        else
+        {
+            for(int x=0; x<10; x++)
+                printf(" %s%s\t\t%04d \n",buffer[x].nome,":",buffer[x].pontos);
+
+        }
+        fclose(getpoints);
+        printf("\n***************************\n");
+        system("pause");
+        ranking(p1);
     }
-
-    for(int x=0;x<i;x++)
-        printf("%s%s\t\t%04d \n",buffer[x].nome,":",buffer[x].pontos);
-
-    fclose(getpoints);
-    printf("\n*********************\n");
-    system("pause");
-    ranking(p1);
 }
 
 

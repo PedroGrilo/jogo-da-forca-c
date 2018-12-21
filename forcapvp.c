@@ -11,7 +11,8 @@ typedef struct
 USERS;
 
 loginMenu();
-int isvogal(char letra){
+int isvogal(char letra)
+{
 
     if(letra=='a'||letra=='e'||letra=='i'||letra=='o'||letra=='u')
         return 1;
@@ -28,7 +29,7 @@ void header(char nome[], char msg[], int vidas,char tentativas[],int i)
     printf("/**********************************/\n");
     vida(vidas);
     printf("\nLetras ja usadas: ");
-    for(k=0;k<i;k++)
+    for(k=0; k<i; k++)
         printf("%c ",tentativas[k]);
     printf("\n");
     puts(msg);
@@ -100,126 +101,140 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1)
 
         for (int i = 0; i < guesssize; i++)
             printf("%c ", frase[i]);
-        if(falhascount!=8){
-        puts("\n\nIntroduza uma letra 0-Desistir > ");
-        fflush(stdin);
-        scanf("%c",&tentativa[i]);
-        strcpy(msg, "");
-        if(i!=0){
-        for(k=0;k<3;k++){
-            if(isvogal(tentativa[k])==1){
+        if(falhascount!=8)
+        {
+            puts("\n\nIntroduza uma letra 0-Desistir > ");
+            fflush(stdin);
+            scanf("%c",&tentativa[i]);
+            strcpy(msg, "");
+            if(i!=0)
+            {
+                for(k=0; k<3; k++)
+                {
+                    if(isvogal(tentativa[k])==1)
+                    {
+                        system("cls");
+                        strcpy(msg, "\nNao sao aceites vogais até à terceira ronda, tente novamente!\n");
+                        i--;
+                        continue;
+                    }
+                }
+                k=0;
+            }
+            else if(isvogal(tentativa[0]))
+            {
+
                 system("cls");
                 strcpy(msg, "\nNao sao aceites vogais até à terceira ronda, tente novamente!\n");
-                i--;
                 continue;
             }
-        }
-        k=0;
-        }else if(isvogal(tentativa[0])){
-
-            system("cls");
-            strcpy(msg, "\nNao sao aceites vogais até à terceira ronda, tente novamente!\n");
-            continue;
-        }
-        if (isdigit(tentativa[i])){
-            if(tentativa[i]!='0'){
-                system("cls");
-                strcpy(msg, "\nNao sao aceites numeros, tente novamente!\n");
-                i--;
-                continue;
-            }else{
-                falhascount = 8;
+            if (isdigit(tentativa[i]))
+            {
+                if(tentativa[i]!='0')
+                {
+                    system("cls");
+                    strcpy(msg, "\nNao sao aceites numeros, tente novamente!\n");
+                    i--;
+                    continue;
+                }
+                else
+                {
+                    falhascount = 8;
+                }
             }
-        }
-        else if (!((tolower(tentativa[i]) >=97 && tolower(tentativa[i]) <= 122)|| tentativa[i]==32)){
-            system("cls");
-            strcpy(msg, "\nNao sao aceites espacos, tente novamente!\n");
-            i--;
-            continue;
-        }else{
-
-        for (k = 0; k < i; k++)
-        {
-            if (tolower(tentativa[i]) == tolower(tentativa[k]))
+            else if (!((tolower(tentativa[i]) >=97 && tolower(tentativa[i]) <= 122)|| tentativa[i]==32))
             {
                 system("cls");
-                strcpy(msg, "\nERRO: Esse caracter já foi introduzido\n");
+                strcpy(msg, "\nNao sao aceites espacos, tente novamente!\n");
                 i--;
-                samechar = 1;
                 continue;
-
             }
             else
             {
-                samechar = 0;
-            }
 
-        }
-
-        }
-        falha = 1;
-
-
-
-
-        if (samechar == 0)
-        {
-            for (k = 0; k < guesssize; k++)
-            {
-                if (tolower(tentativa[i]) == tolower(forca[k]))
+                for (k = 0; k < i; k++)
                 {
-                    frase[k] = tolower(tentativa[i]);
-                    falha = 0;
+                    if (tolower(tentativa[i]) == tolower(tentativa[k]))
+                    {
+                        system("cls");
+                        strcpy(msg, "\nERRO: Esse caracter já foi introduzido\n");
+                        i--;
+                        samechar = 1;
+                        continue;
+
+                    }
+                    else
+                    {
+                        samechar = 0;
+                    }
+                }
+
+            }
+            falha = 1;
+
+
+
+
+            if (samechar == 0)
+            {
+                for (k = 0; k < guesssize; k++)
+                {
+                    if (tolower(tentativa[i]) == tolower(forca[k]))
+                    {
+                        frase[k] = tolower(tentativa[i]);
+                        falha = 0;
+                    }
+                }
+                if (falha == 1 && falhascount < 5 && samechar == 0) //player 1
+                {
+                    falhas[falhascount] = tentativa[i];
+                    falhascount++;
+                }
+                else if (falhascount > 5)
+                {
+                    system("cls");
+                    header(p1.nome, msg, 7,tentativa,i);
+                    printf("Perdeu o jogo (%s) contra o Player '%s' !!\n", p1.nome, p2.nome);
+                    printf("\n\nDeseja voltar ao menu?[S/N]");
+                    getchar();
+                    scanf(" %c", & voltar);
+                    if (tolower(voltar) == 's')
+                        menuForca(p1);
+                    else
+                        printf("\nVolte sempre");
+                    exit(1);
+                }
+                if (strcmp(forca, frase) == 0) //player 2
+                {
+                    system("cls");
+                    header(p2.nome, msg, 8,tentativa,i);
+                    printf("Ganhou o jogo (%s) contra o Player '%s' !!\n Ganhou ", p2.nome, p1.nome);
+                    savepoints(falhascount,p2,guesssize); //mudar
+                    printf("\nDeseja voltar ao menu?[S/N]");
+                    getchar();
+                    scanf(" %c", & voltar);
+                    if (tolower(voltar) == 's')
+                        menuForca(p1);
+                    else
+                        printf("Volte sempre\n");
+                    exit(1);
                 }
             }
-            if (falha == 1 && falhascount < 5 && samechar == 0) //player 1
-            {
-                falhas[falhascount] = tentativa[i];
-                falhascount++;
-            }
-            else if (falhascount > 5)
-            {
-                system("cls");
-                header(p1.nome, msg, 7,tentativa,i);
-                printf("Perdeu o jogo (%s) contra o Player '%s' !!\n", p1.nome, p2.nome);
-                printf("\n\nDeseja voltar ao menu?[S/N]");
-                getchar();
-                scanf(" %c", & voltar);
-                if (tolower(voltar) == 's')
-                    menuForca(p1);
-                else
-                    printf("\nVolte sempre");
-                exit(1);
-            }
-            if (strcmp(forca, frase) == 0) //player 2
-            {
-                system("cls");
-                header(p2.nome, msg, 8,tentativa,i);
-                printf("Ganhou o jogo (%s) contra o Player '%s' !!\n Ganhou ", p2.nome, p1.nome);
-                savepoints(falhascount,p2,guesssize); //mudar
-                printf("\nDeseja voltar ao menu?[S/N]");
-                getchar();
-                scanf(" %c", & voltar);
-                if (tolower(voltar) == 's')
-                    menuForca(p1);
-                else
-                    printf("Volte sempre\n");
-                exit(1);
-            }
+            i++;
         }
-        i++;
-        }else{
-                system("cls");
-                header(p1.nome, msg, 7,tentativa,i);
-                printf("Perdeu o jogo (%s) contra o Player '%s' !!\n", p1.nome, p2.nome);
-                printf("\n\nDeseja voltar ao menu?[S/N]");
-                getchar();
-                scanf(" %c", & voltar);
-                if (tolower(voltar) == 's')
-                    menuForca(p1);
-                else
-                    printf("\nVolte sempre");
-                exit(1);
+        else
+        {
+            system("cls");
+            header(p1.nome, msg, 7,tentativa,i);
+            printf("Perdeu o jogo (%s) contra o Player '%s' !!\n", p1.nome, p2.nome);
+            printf("\n\nDeseja voltar ao menu?[S/N]");
+            getchar();
+            scanf(" %c", & voltar);
+            if (tolower(voltar) == 's')
+                menuForca(p1);
+            else
+                printf("\nVolte sempre");
+            exit(1);
         }
     }
     while (i < 26);
@@ -232,14 +247,12 @@ void savepoints(int erros, USERS p2,int stringlength)
         char nome[21];
         char pass[21];
         int pontos;
-    }reader;
+    } reader;
     reader usersubdata,buffer;
 
     FILE * getpoints;
     long int recsize;
 
-
-    int pontos[7] = {10,8,6,4,3,2,0};
     usersubdata.pontos=p2.pontos;
     switch (erros)
     {
@@ -273,25 +286,28 @@ void savepoints(int erros, USERS p2,int stringlength)
             break;
     }
 
-    printf("Para um total de %d pontos!",usersubdata.pontos);
+    printf("Para um total de: %d pontos!",usersubdata.pontos);
     getpoints=fopen("users.dat","rb+");
     rewind(getpoints);
     strcpy(usersubdata.nome,p2.nome);
     strcpy(usersubdata.pass,p2.pass);
     recsize=sizeof(reader);
-    while(fread(&buffer,recsize,1,getpoints)==1){
-        if(strcmp(buffer.nome,p2.nome)==0){
-                fseek(getpoints,-recsize,SEEK_CUR);
-                fflush(getpoints);
-                fwrite(&usersubdata,recsize,1,getpoints);
-                break;
+    while(fread(&buffer,recsize,1,getpoints)==1)
+    {
+        if(strcmp(buffer.nome,p2.nome)==0)
+        {
+            fseek(getpoints,-recsize,SEEK_CUR);
+            fflush(getpoints);
+            fwrite(&usersubdata,recsize,1,getpoints);
+            break;
         }
     }
     fclose(getpoints);
 }
 
 
-int verificacoes(char nome[]){
+int verificacoes(char nome[])
+{
     if(strlen(nome)<3)
     {
         printf("A frase NÃO pode conter menos de 3 caracteres\n\n");
