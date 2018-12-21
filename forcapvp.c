@@ -7,9 +7,9 @@ typedef struct
     char nome[21];
     char pass[21];
     int pontos;
+    int jogadas;
 }
 USERS;
-
 loginMenu();
 int isvogal(char letra)
 {
@@ -130,11 +130,12 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1)
                     continue;
                 }
             }
-            if(tentativa[i]==' '){
+            if(tentativa[i]==' ')
+            {
                 system("cls");
-                    strcpy(msg, "\nNao sao aceites espacos, tente novamente!\n");
+                strcpy(msg, "\nNao sao aceites espacos, tente novamente!\n");
 
-                    continue;
+                continue;
             }
             else if (!((tolower(tentativa[i]) >=97 && tolower(tentativa[i]) <= 122)|| tentativa[i]==32))
             {
@@ -188,7 +189,7 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1)
                 {
                     system("cls");
                     header(p1.nome, msg, 7,tentativa,i);
-                    printf("Perdeu o jogo (%s) contra o Player '%s' !!\n", p1.nome, p2.nome);
+                    printf("Perdeu o jogo (%s) a o Player '%s' !!\n", p1.nome, p2.nome);
                     printf("\n\nDeseja voltar ao menu?[S/N]");
                     getchar();
                     scanf(" %c", & voltar);
@@ -203,7 +204,7 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1)
                     system("cls");
                     header(p2.nome, msg, 8,tentativa,i);
                     printf("Ganhou o jogo (%s) contra o Player '%s' !!\n Ganhou ", p2.nome, p1.nome);
-                    savepoints(falhascount,p2,guesssize); //mudar
+                    savepoints(falhascount,p2,guesssize);
                     printf("\nDeseja voltar ao menu?[S/N]");
                     fflush(stdin);
                     scanf(" %c", & voltar);
@@ -241,12 +242,12 @@ void savepoints(int erros, USERS p2,int stringlength)
         char nome[21];
         char pass[21];
         int pontos;
+        int jogadas;
     } reader;
     reader usersubdata,buffer;
 
     FILE * getpoints;
     long int recsize;
-
     usersubdata.pontos=p2.pontos;
     switch (erros)
     {
@@ -285,6 +286,7 @@ void savepoints(int erros, USERS p2,int stringlength)
     rewind(getpoints);
     strcpy(usersubdata.nome,p2.nome);
     strcpy(usersubdata.pass,p2.pass);
+    usersubdata.jogadas = p2.jogadas + 1;
     recsize=sizeof(reader);
     while(fread(&buffer,recsize,1,getpoints)==1)
     {

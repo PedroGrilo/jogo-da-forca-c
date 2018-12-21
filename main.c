@@ -6,7 +6,6 @@
 #include "menus.h"
 #define MAX_CHAR 21
 
-
 int main()
 {
     setlocale(LC_ALL,"portuguese");

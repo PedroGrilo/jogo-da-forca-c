@@ -10,6 +10,7 @@ typedef struct
     char nome[MAX_CHAR];
     char pass[MAX_CHAR];
     int pontos;
+    int jogadas;
 } USERS;
 USERS data,p1,p2;
 
@@ -43,6 +44,27 @@ void menuPrincipal()
     }
 }
 
+
+int vEspacos(char string[])
+{
+    int i;
+    int tst=0;
+    for(i=0; i<strlen(string); i++)
+    {
+        if(string[i]==32)
+        {
+            tst = 1;
+            break;
+        }
+        else
+            tst = 0;
+    }
+    if(tst==1)
+        return 1;
+    else
+        return 0;
+}
+
 void menuNovoUtilizador()
 {
 
@@ -52,20 +74,32 @@ void menuNovoUtilizador()
     int pontos = 0;
 
     int continuar;
+    do
+    {
+        system("cls");
+        printf("/************************************/\n");
+        printf("/** Jogo da Forca - Novo utlizador **/\n");
+        printf("/************************************/\n");
+        if(vEspacos(nometemp)==1)
+        {
+            printf("\nO nome de utilizador NÃO pode conter espaços no inicio\n");
+        }
+        else if(vEspacos(passtemp)==1 || vEspacos(passtemp2)==1)
+        {
+            printf("\nAs palavras-passes NÃO podem conter espaços\n");
+        }
+        printf("\nIntroduza o seu nome: ");
+        fflush(stdin);
+        gets(nometemp);
+        printf("\nIntroduza a sua palavra-passe: ");
+        fflush(stdin);
+        gets(passtemp);
+        printf("\nIntroduza a sua palavra-passe novamente: ");
+        fflush(stdin);
+        gets(passtemp2);
+    }
+    while(vEspacos(nometemp)==1 || vEspacos(passtemp)==1 || vEspacos(passtemp2)==1);
 
-    system("cls");
-    printf("/************************************/\n");
-    printf("/** Jogo da Forca - Novo utlizador **/\n");
-    printf("/************************************/\n");
-    printf("\nIntroduza o seu nome: ");
-    fflush(stdin);
-    scanf("%s",nometemp);
-    printf("\nIntroduza a sua palavra-passe: ");
-    fflush(stdin);
-    gets(passtemp);
-    printf("\nIntroduza a sua palavra-passe novamente: ");
-    fflush(stdin);
-    gets(passtemp2);
 
     animation("A registar");
 
@@ -95,6 +129,7 @@ void menuNovoUtilizador()
             strcpy(data.nome, nometemp);
             strcpy(data.pass, passtemp);
             data.pontos = pontos;
+            data.jogadas = 0;
 
             fwrite(&data, sizeof(USERS), 1, fout);
             if (fwrite)
@@ -130,18 +165,31 @@ int loginMenu()
     int logged = 0;
 
     int continuar;
-    system("cls");
-    printf("/****************************/\n");
-    printf("/** Jogo da Forca - Entrar **/\n");
-    printf("/****************************/\n");
-    fflush(stdin);
-    printf("\nIntroduza o seu nome: ");
-    gets(nometemp);
+    do
+    {
+        system("cls");
 
-    fflush(stdin);
-    printf("\nIntroduza a sua palavra-passe: ");
-    gets(passtemp);
-    fflush(stdin);
+        printf("/****************************/\n");
+        printf("/** Jogo da Forca - Entrar **/\n");
+        printf("/****************************/\n");
+
+        if(vEspacos(nometemp)==1)
+        {
+            printf("\nO nome NÃO pode conter espaços\n");
+        }
+        else if(vEspacos(passtemp)==1)
+        {
+            printf("\nA palavra-passe NÃO pode conter espaços\n");
+        }
+        printf("\nIntroduza o seu nome: ");
+        fflush(stdin);
+        gets(nometemp);
+        printf("\nIntroduza a sua palavra-passe: ");
+        fflush(stdin);
+        gets(passtemp);
+        fflush(stdin);
+    }
+    while(vEspacos(nometemp)==1 || vEspacos(passtemp)==1);
     fin = fopen("users.dat", "ab+");
 
 
@@ -174,22 +222,32 @@ int loginp2()
     char nometemp[MAX_CHAR];
     char passtemp[MAX_CHAR];
     int logged = 0;
-
     int continuar;
-    system("cls");
-    printf("/*************************************/\n");
-    printf("/** Jogo da Forca - Entrar Player 2 **/\n");
-    printf("/*************************************/\n");
-    fflush(stdin);
-    printf("\nIntroduza o seu nome: ");
-    gets(nometemp);
+    do
+    {
+        system("cls");
+        printf("/*************************************/\n");
+        printf("/** Jogo da Forca - Entrar Player 2 **/\n");
+        printf("/*************************************/\n");
+        if(vEspacos(nometemp)==1)
+        {
+            printf("\nO nome NÃO pode conter espaços\n");
+        }
+        else if(vEspacos(passtemp)==1)
+        {
+            printf("\nA palavra-passe NÃO pode conter espaços\n");
+        }
+        printf("\nIntroduza o seu nome: ");
+        fflush(stdin);
+        gets(nometemp);
+        printf("\nIntroduza a sua palavra-passe: ");
+        fflush(stdin);
+        gets(passtemp);
+        fflush(stdin);
+    }
+    while(vEspacos(nometemp)==1 || vEspacos(passtemp)==1);
 
-    fflush(stdin);
-    printf("\nIntroduza a sua palavra-passe: ");
-    gets(passtemp);
-    fflush(stdin);
     fin = fopen("users.dat", "ab+");
-
 
     animation("A verificar se está correta");
     while (!feof(fin))
@@ -316,6 +374,7 @@ void rankpvp()
         char nome[21];
         char pass[21];
         int pontos;
+        int jogadas;
     } reader;
     reader data,buffer[200],temp;
 
@@ -335,12 +394,12 @@ void rankpvp()
 
 
         system("cls");
-        printf("/***************************/\n");
-        printf("/********* Ranking *********/\n");
-        printf("/***************************/\n");
-        printf("\n Nome:\t\tPontos:\n");
-        printf("\n %s%s\t\t%04d\n\n",p1.nome,":",p1.pontos);
-        printf("*** HIGHSCORES -- TOP 10 ***\n\n");
+        printf("/************************************/\n");
+        printf("/************* Ranking **************/\n");
+        printf("/************************************/\n");
+        printf("\n    Nome      |NºJogos| Pontos:\n");
+        printf("\n    %-10s |  %d  | %04d \n\n",p1.nome,p1.jogadas,p1.pontos);
+        printf("************ HIGHSCORES *************\n\n");
 
         rewind(getpoints);
         strcpy(data.nome,p2.nome);
@@ -373,24 +432,25 @@ void rankpvp()
                     buffer[t+1]=temp;
 
                 }
+
+                if((buffer[t].pontos==buffer[t+1].pontos) && (buffer[t].jogadas>buffer[t+1].jogadas))
+                {
+                    temp=buffer[t];
+                    buffer[t]=buffer[t+1];
+                    buffer[t+1]=temp;
+                }
             }
         }
-        if(i<10)
-        {
-            printf("É preciso no mínimo 10 players estarem registados!\n")
-            ;
-        }
-        else
-        {
-            for(int x=0; x<10; x++)
-                printf(" %s%s\t\t%04d \n",buffer[x].nome,":",buffer[x].pontos);
+        for(int x=0; x<i; x++)
+            printf(" %d. %-10s |  %d  | %04d \n",x+1,buffer[x].nome,buffer[x].jogadas,buffer[x].pontos);
 
-        }
+
         fclose(getpoints);
-        printf("\n***************************\n");
+        printf("\n************************************\n");
         system("pause");
         ranking(p1);
     }
 }
+
 
 
