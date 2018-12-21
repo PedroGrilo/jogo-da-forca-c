@@ -303,22 +303,27 @@ void ranking(USERS p1)
 }
 
 void rankpvp(){
-    system("cls");
-    printf("/*******************/\n");
-    printf("/***** Ranking *****/\n");
-    printf("/*******************/\n");
-    printf("\n%-5s %04d pontos\n\n",strcat(p1.nome,":"),p1.pontos);
-    printf("*******HIGHSCORES*******\n");
+    int i=0;
+
+
      typedef struct
     {
         char nome[21];
         char pass[21];
         int pontos;
     }reader;
-    reader data,buffer;
+    reader data,buffer[200],temp;
 
     FILE * getpoints;
     long int recsize;
+
+
+    system("cls");
+    printf("/*******************/\n");
+    printf("/***** Ranking *****/\n");
+    printf("/*******************/\n");
+    printf("\n%s%s\t\t%04d pontos\n\n",p1.nome,":",p1.pontos);
+    printf("*****HIGHSCORES*****\n");
 
     getpoints=fopen("users.dat","r");
     rewind(getpoints);
@@ -330,10 +335,28 @@ void rankpvp(){
         if(!(fread(&data,recsize,1,getpoints))){
             break;
         }else{
-            printf("\n%-5s %04d pontos\n",strcat(data.nome,":"),data.pontos);
+            buffer[i] = data;
+        }
+        i++;
+
+    }
+
+    for(int n=0;n<i-1;n++){
+        for(int t=0;t<(i-1-n);t++){
+            if(buffer[t].pontos<buffer[t+1].pontos){
+                temp=buffer[t];
+                buffer[t]=buffer[t+1];
+                buffer[t+1]=temp;
+
+            }
         }
     }
+
+    for(int x=0;x<i;x++)
+        printf("%s%s\t\t%04d \n",buffer[x].nome,":",buffer[x].pontos);
+
     fclose(getpoints);
+    printf("\n*********************\n");
     system("pause");
     ranking(p1);
 }
