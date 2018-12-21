@@ -49,6 +49,10 @@ int vEspacos(char string[])
 {
     int i;
     int tst=0;
+
+        if(string[0]=='\0'){
+         tst = 1;
+        }else{
     for(i=0; i<strlen(string); i++)
     {
         if(string[i]==32)
@@ -58,6 +62,7 @@ int vEspacos(char string[])
         }
         else
             tst = 0;
+    }
     }
     if(tst==1)
         return 1;
