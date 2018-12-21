@@ -12,6 +12,7 @@ typedef struct
     int pontos;
     int jogadas;
 } USERS;
+
 USERS data,p1,p2;
 
 FILE *fout;
@@ -45,7 +46,7 @@ void menuPrincipal()
 }
 
 
-int vEspacos(char string[])
+int vEspacos(char string[]) // verificação de espaços, ou enter's
 {
     int i;
     int tst=0;
@@ -258,7 +259,7 @@ int loginp2()
     fin = fopen("users.dat", "ab+");
 
     animation("A verificar se está correta");
-    while (!feof(fin))
+    while (!feof(fin))//Percorre o ficheiro e armazena na estrutura
     {
         fread(&p2, sizeof(USERS), 1, fin);
         if ((!strcmp(nometemp, p2.nome)) && (!strcmp(passtemp, p2.pass)))
@@ -390,7 +391,7 @@ void rankpvp()
 
     getpoints=fopen("users.dat","rb");
 
-    if(getpoints==NULL)
+    if(getpoints==NULL) //verifica se o ficheiro existe na pasta
     {
         printf("Erro ao abrir ficheiro, saia do jogo e volte a inicia-lo\n\n");
         getchar();
@@ -429,6 +430,8 @@ void rankpvp()
 
         }
 
+        //bubble sort - ordenaçao no ranking por pontos e jogadas
+
         for(int n=0; n<i-1; n++)
         {
             for(int t=0; t<(i-1-n); t++)
@@ -449,7 +452,7 @@ void rankpvp()
                 }
             }
         }
-        for(int x=0; x<i; x++)
+        for(int x=0; x<i; x++)//printf dos dados dos utilizadores
             printf(" %d. %-10s |  %d  | %04d \n",x+1,buffer[x].nome,buffer[x].jogadas,buffer[x].pontos);
 
 

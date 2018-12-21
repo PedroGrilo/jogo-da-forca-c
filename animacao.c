@@ -46,7 +46,7 @@ void vida2()
     printf("   |\n");
     printf("   |\n");
     printf("___|___\n");
-   }
+}
 
 void vida3()
 {
@@ -57,7 +57,7 @@ void vida3()
     printf("   |\n");
     printf("   |\n");
     printf("___|___\n");
-   }
+}
 void vida4()
 {
     printf("    ________\n");
@@ -78,7 +78,8 @@ void vida5()
     printf("   |       /|\\\n");
     printf("   |       /\n");
     printf("   |\n");
-    printf("___|___\n");}
+    printf("___|___\n");
+}
 void vida6()
 {
     printf("    ________\n");
@@ -88,7 +89,7 @@ void vida6()
     printf("   |       / \\\n");
     printf("   |\n");
     printf("___|___\n");
-    }
+}
 void animacaoperdeu()
 {
     int i = 0;
@@ -103,7 +104,7 @@ void animacaoperdeu()
         printf("   |       / \\\n");
         printf("   |\n");
         printf("___|___\n");
-            Sleep(200);
+        Sleep(200);
         system("cls");
 
 
@@ -114,8 +115,9 @@ void animacaoperdeu()
         printf("   |        |\n");
         printf("   |       / \\\n");
         printf("   |\n");
-        printf("___|___\n");i++;
-     Sleep(200);
+        printf("___|___\n");
+        i++;
+        Sleep(200);
     }
 }
 void win()
@@ -134,8 +136,9 @@ void win()
         i++;
     }
     system("cls");
-        printf("\t       RESULTADO      \n");
-        printf("\n\t * * * PARABENS! * * *\n");}
+    printf("\t       RESULTADO      \n");
+    printf("\n\t * * * PARABENS! * * *\n");
+}
 
 void vida(int vida)
 {

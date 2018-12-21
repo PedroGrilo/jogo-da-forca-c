@@ -11,9 +11,8 @@ typedef struct
 }
 USERS;
 loginMenu();
-int isvogal(char letra)
+int isvogal(char letra) // verificar se é vogal
 {
-
     if(letra=='a'||letra=='e'||letra=='i'||letra=='o'||letra=='u')
         return 1;
     else
@@ -38,6 +37,7 @@ void header(char nome[], char msg[], int vidas,char tentativas[],int i)
 
 void words(USERS p1, USERS p2)
 {
+    //player 1, introduzir a palavra/frase para o player 2;
     char repetir, forca[maxforca], frase[maxforca], msg[maxforca] = {};
     int i = 0, k = 0;
     do
@@ -60,6 +60,8 @@ void words(USERS p1, USERS p2)
 
         for(k=0; k<i; k++)
         {
+            //criar uma variavel, com os underscores correspondentes à frase introduzida.
+
             if(verificacoes(forca)==0)
             {
                 if(forca[k]==' ')
@@ -86,6 +88,7 @@ void words(USERS p1, USERS p2)
 }
 void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1)
 {
+    // player 2, adivinhar a palavra/frase do player 1
 
     char tentativa[26], falhas[6], msg[maxforca] = {}, voltar;
     int i = 0, k = 0, samechar = 0, guesssize = strlen(forca), falha = 1, falhascount = 0, counter = 0;
@@ -103,7 +106,7 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1)
             printf("%c ", frase[i]);
         if(falhascount!=7 && falhascount!=6)
         {
-            puts("\n\nIntroduza uma letra 0-Desistir > ");
+            puts("\n\nIntroduza uma letra 0-Desistir > "); // desistir do jogo
             fflush(stdin);
             scanf("%c",&tentativa[i]);
             strcpy(msg, "");
@@ -302,7 +305,7 @@ void savepoints(int erros, USERS p2,int stringlength)
 }
 
 
-int verificacoes(char nome[])
+int verificacoes(char nome[]) //verifica se a frase que o player 1 introduz, têm pelo menos 3 caracteres, não conter espaços inciais e caracteres especiais
 {
     if(strlen(nome)<3)
     {
