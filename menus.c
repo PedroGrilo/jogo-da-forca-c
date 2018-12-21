@@ -50,19 +50,22 @@ int vEspacos(char string[])
     int i;
     int tst=0;
 
-        if(string[0]=='\0'){
-         tst = 1;
-        }else{
-    for(i=0; i<strlen(string); i++)
+    if(string[0]=='\0')
     {
-        if(string[i]==32)
-        {
-            tst = 1;
-            break;
-        }
-        else
-            tst = 0;
+        tst = 1;
     }
+    else
+    {
+        for(i=0; i<strlen(string); i++)
+        {
+            if(string[i]==32)
+            {
+                tst = 1;
+                break;
+            }
+            else
+                tst = 0;
+        }
     }
     if(tst==1)
         return 1;
@@ -87,7 +90,7 @@ void menuNovoUtilizador()
         printf("/************************************/\n");
         if(vEspacos(nometemp)==1)
         {
-            printf("\nO nome de utilizador NÃO pode conter espaços no inicio\n");
+            printf("\nO nome de utilizador NÃO pode conter espaços\n");
         }
         else if(vEspacos(passtemp)==1 || vEspacos(passtemp2)==1)
         {
@@ -180,7 +183,7 @@ int loginMenu()
 
         if(vEspacos(nometemp)==1)
         {
-            printf("\nO nome NÃO pode conter espaços\n");
+            printf("\nO nome de utilizador NÃO pode conter espaços\n");
         }
         else if(vEspacos(passtemp)==1)
         {
