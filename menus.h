@@ -6,4 +6,5 @@ void menuNovoUtilizador();
 int loginMenu();
 void ranking();
 int vEspacos();
+
 #endif // MENUS_H_INCLUDED

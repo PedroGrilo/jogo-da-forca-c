@@ -4,6 +4,8 @@
 #include <string.h>
 #include <ctype.h>
 #include "menus.h"
+#include "forcapvc.h"
+#include "forcapvp.h"
 #define MAX_CHAR 21
 
 int main()

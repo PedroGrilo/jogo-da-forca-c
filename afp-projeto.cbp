@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="animacao.h" />
+		<Unit filename="forcapvc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="forcapvc.h" />
 		<Unit filename="forcapvp.c">
 			<Option compilerVar="CC" />
 		</Unit>

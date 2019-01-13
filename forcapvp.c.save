@@ -280,7 +280,7 @@ int verificacoes(char nome[])  // verifica se a frase que o player 1 introduz,
     int tst = 0;
 
     for (int i = 0; i < strlen(nome); i++) {
-      if ((nome[i] >= 97 && nome[i] <= 122) || (nome[i] >= 65 && nome[i] <= 90) || nome[i] == 32) {
+      if ((nome[i] >= 97 && nome[i] <= 122) || nome[i] >= 65 && nome[i] <= 90) || nome[i] == 32) {
         tst = 0;
       } else {
         tst = 1;
