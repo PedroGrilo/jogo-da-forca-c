@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <windows.h>
 #include <stdbool.h>
+#include <locale.h>
 #define MAX_CHAR 21
 
 typedef struct {

@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1547311473 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\menus.c
+1547549484 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\menus.c
 	<string.h>
 	<stdlib.h>
 	<stdio.h>
 	<windows.h>
 	<stdbool.h>
+	<locale.h>
 
 1547311277 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\main.c
 	<stdio.h>
@@ -94,7 +95,7 @@
 	<stdlib.h>
 	<locale.h>
 
-1547317006 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\forcapvc.c
+1547548578 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\forcapvc.c
 	<stdio.h>
 	<stdlib.h>
 	<locale.h>

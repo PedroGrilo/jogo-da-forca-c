@@ -19,6 +19,8 @@ typedef struct
 void chooseTheme(USERSPC p1, char* tema[maxforca])
 {
     char op;
+
+    setlocale(LC_ALL,"Portuguese");
     do
     {
         system("cls");
@@ -73,6 +75,7 @@ void wordspc(USERSPC p1)
     char repetir, forca[maxforca], frase[maxforca],
         msg[maxforca] = {}, palavrast[maxpalavras][maxforca], c, tema[maxpalavras][maxforca],
         temapesq[maxforca], palavrapesq[maxforca], temas[maxforca];
+
     int i = 0, k = 0, max = 0, random = 0;
 
     chooseTheme(p1, &temas);
@@ -81,7 +84,7 @@ void wordspc(USERSPC p1)
     srand(time(NULL));
     FILE* palavras;
 
-    palavras = fopen("palavras.txt", "r");
+    palavras = fopen("palavras.txt", "r+");
 
     if (palavras != NULL)
     {
@@ -92,8 +95,14 @@ void wordspc(USERSPC p1)
                 strcpy(tema[max], temapesq);
                 strcpy(palavrast[max], palavrapesq);
                 max++;
+            }else{
+                printf("\n> Não existe palavras para este tema no ficheiro.\n\nPressione qualquer tecla para continuar.");
+                fflush(stdin);
+                getchar();
+                menuForca(p1);
             }
         }
+
 
         random = rand() % max;
 
@@ -122,6 +131,11 @@ void wordspc(USERSPC p1)
 
         system("cls");
         guesserpc(forca, frase, p1, tema[random]);
+    }else{
+        printf("\n> Erro ao abrir ficheiro.\n\nPressione qualquer tecla para continuar.");
+        fflush(stdin);
+        getchar();
+        menuForca(p1);
     }
 }
 void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema[maxforca])
