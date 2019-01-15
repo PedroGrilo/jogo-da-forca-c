@@ -281,6 +281,8 @@ void menuForca(USERS p1) {
     case '3':
       ranking(p1);
       break;
+    case '4':
+        userdatalogin(p1);
     case '0':
       menuPrincipal();
       break;
@@ -321,7 +323,7 @@ void ranking(USERS p1) {
 }
 
 void rankpvp(USERS p1) {
-  int i = 0;
+  int i = 0,t=0,x=0,n=0;
   typedef struct {
     char nome[21];
     char pass[21];
@@ -369,8 +371,8 @@ void rankpvp(USERS p1) {
 
     // bubble sort - ordenaçao no ranking por pontos e jogadas
 
-    for (int n = 0; n < i - 1; n++) {
-      for (int t = 0; t < (i - 1 - n); t++) {
+    for (n = 0; n < i - 1; n++) {
+      for (t = 0; t < (i - 1 - n); t++) {
         if (buffer[t].pontos < buffer[t + 1].pontos) {
           temp = buffer[t];
           buffer[t] = buffer[t + 1];
@@ -385,7 +387,7 @@ void rankpvp(USERS p1) {
         }
       }
     }
-    for (int x = 0; x < i; x++)  // printf dos dados dos utilizadores
+    for (x = 0; x < i; x++)  // printf dos dados dos utilizadores
       printf(" %d. %-10s |  %d  | %04d \n", x + 1, buffer[x].nome,
              buffer[x].jogadas, buffer[x].pontos);
 
@@ -397,7 +399,7 @@ void rankpvp(USERS p1) {
 }
 
 void rankpvc(USERS p1) {
-  int i = 0;
+  int i = 0,x=0,n=0,t=0;
   typedef struct {
     char nome[21];
     char pass[21];
@@ -445,8 +447,8 @@ void rankpvc(USERS p1) {
 
     // bubble sort - ordenaçao no ranking por pontos e jogadaspc
 
-    for (int n = 0; n < i - 1; n++) {
-      for (int t = 0; t < (i - 1 - n); t++) {
+    for (n = 0; n < i - 1; n++) {
+      for (t = 0; t < (i - 1 - n); t++) {
         if (buffer[t].pontosvspc < buffer[t + 1].pontosvspc) {
           temp = buffer[t];
           buffer[t] = buffer[t + 1];
@@ -461,7 +463,7 @@ void rankpvc(USERS p1) {
         }
       }
     }
-    for (int x = 0; x < i; x++)  // printf dos dados dos utilizadores
+    for (x = 0; x < i; x++)  // printf dos dados dos utilizadores
       printf(" %d. %-10s |  %d  | %04d \n", x + 1, buffer[x].nome,
              buffer[x].jogadaspc, buffer[x].pontosvspc);
 
