@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1547549734 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\menus.c
+1547549484 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\menus.c
 	<string.h>
 	<stdlib.h>
 	<stdio.h>
@@ -7,7 +7,7 @@
 	<stdbool.h>
 	<locale.h>
 
-1547549734 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\main.c
+1547311277 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\main.c
 	<stdio.h>
 	<stdlib.h>
 	<locale.h>
@@ -17,15 +17,15 @@
 	"forcapvc.h"
 	"forcapvp.h"
 
-1547549734 c:\users\creep\desktop\ctesp\afp\afp-projeto\menus.h
+1547310604 c:\users\creep\desktop\ctesp\afp\afp-projeto\menus.h
 
-1547549734 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\animacao.c
+1547310656 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\animacao.c
 	<stdio.h>
 	<stdlib.h>
 	<locale.h>
 	<string.h>
 
-1547550164 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\forcapvp.c
+1547316287 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\forcapvp.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -95,14 +95,14 @@
 	<stdlib.h>
 	<locale.h>
 
-1547549734 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\forcapvc.c
+1547548578 source:c:\users\creep\desktop\ctesp\afp\afp-projeto\forcapvc.c
 	<stdio.h>
 	<stdlib.h>
 	<locale.h>
 	<string.h>
 	"menus.h"
 
-1547549734 c:\users\creep\desktop\ctesp\afp\afp-projeto\forcapvc.h
+1547199693 c:\users\creep\desktop\ctesp\afp\afp-projeto\forcapvc.h
 
 1545311591 c:\users\creep\desktop\ctesp\afp\afp-projeto\forcapvp.h
 
