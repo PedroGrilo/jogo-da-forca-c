@@ -72,7 +72,7 @@ void wordspc(USERSPC p1)
 {
     char repetir, forca[maxforca], frase[maxforca],
         msg[maxforca] = {}, palavrast[maxpalavras][maxforca], c, tema[maxpalavras][maxforca],
-        temapesq[maxforca], palavrapesq[maxforca], temas[maxforca];
+        temapesq[maxforca], palavrapesq[maxforca], temas[maxforca],nExiste = 1;
 
     int i = 0, k = 0, max = 0, random = 0;
 
@@ -86,14 +86,22 @@ void wordspc(USERSPC p1)
 
     if (palavras != NULL)
     {
-        while (fscanf(palavras, "%s - %s \n", &temapesq, &palavrapesq) != EOF)
+        while (fscanf(palavras, "%s - %21[^\n]", temapesq, palavrapesq) != EOF)
         {
             if (strcmp(temapesq, temas) == 0)
             {
                 strcpy(tema[max], temapesq);
                 strcpy(palavrast[max], palavrapesq);
                 max++;
+                nExiste = 0;
             }
+        }
+
+        if(nExiste){
+            printf("\n> Não existe palavras para este tema.\n\nPressione qualquer tecla para continuar.");
+            fflush(stdin);
+            getchar();
+            menuForca(p1);
         }
 
 

@@ -35,11 +35,6 @@ Objetos - catalizador
 Objetos - televisao
 Objetos - armario
 Objetos - globo
-PdR - gola
-PdR - cachecol
-PdR - camisa
-PdR - casaco
-PdR - luvas
 Cores - bege
 Cores - preto
 Cores - magenta
@@ -47,3 +42,8 @@ Cores - ciano
 Cores - escarlate
 Cores - branco
 Cores - azul
+PdR - gola
+PdR - cachecol
+PdR - camisa
+PdR - casaco
+PdR - luvas
