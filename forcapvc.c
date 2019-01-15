@@ -19,7 +19,6 @@ typedef struct
 void chooseTheme(USERSPC p1, char* tema[maxforca])
 {
     char op;
-
     do
     {
         system("cls");

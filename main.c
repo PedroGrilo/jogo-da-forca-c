@@ -10,6 +10,7 @@
 
 int main()
 {
+
     setlocale(LC_ALL,"");
     system("color F0");
     menuPrincipal();
