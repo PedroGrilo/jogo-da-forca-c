@@ -75,7 +75,6 @@ void wordspc(USERSPC p1)
         temapesq[maxforca], palavrapesq[maxforca], temas[maxforca];
 
     int i = 0, k = 0, max = 0, random = 0;
-    int nExiste = 1;
 
     chooseTheme(p1, &temas);
 
@@ -94,15 +93,7 @@ void wordspc(USERSPC p1)
                 strcpy(tema[max], temapesq);
                 strcpy(palavrast[max], palavrapesq);
                 max++;
-                nExiste = 0;
             }
-        }
-
-        if(nExiste){
-        printf("\n> Erro ao abrir ficheiro.\n\nPressione qualquer tecla para continuar.");
-        fflush(stdin);
-        getchar();
-        menuForca(p1);
         }
 
 
@@ -145,7 +136,7 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
     // player 2, adivinhar a palavra/frase do player 1
 
     char tentativa[26], falhas[6], msg[maxforca] = {}, voltar;
-    int i = 0, k = 0,r, samechar = 0, guesssize = strlen(forca), falha = 1, falhascount = 0,
+    int i = 0, k = 0,g, samechar = 0, guesssize = strlen(forca), falha = 1, falhascount = 0,
         counter = 0;
     do
     {
@@ -163,8 +154,9 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
             printf("Tema : %s\n\n", tema);
         fflush(stdin);
 
-        for ( r = 0; i < guesssize; i++)
-            printf("%c ", frase[i]);
+
+        for ( g = 0;g < guesssize; g++)
+            printf("%c ", frase[g]);
         if (falhascount != 7 && falhascount != 6)
         {
             puts("\n\nIntroduza uma letra (0-Desistir) > "); // desistir do jogo

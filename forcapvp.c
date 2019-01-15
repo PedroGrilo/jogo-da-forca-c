@@ -88,7 +88,7 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1) {
       header(p2.nome, msg, falhascount, tentativa, i);
     fflush(stdin);
 
-    for (g = 0; i < guesssize; i++) printf("%c ", frase[i]);
+    for (g = 0; g < guesssize; g++) printf("%c ", frase[g]);
     if (falhascount != 7 && falhascount != 6) {
       puts("\n\nIntroduza uma letra (0-Desistir) > ");  // desistir do jogo
       fflush(stdin);
