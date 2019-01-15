@@ -282,7 +282,7 @@ void menuForca(USERS p1) {
       ranking(p1);
       break;
     case '4':
-        userdatalogin(p1);
+        userdatamenu(p1);
     case '0':
       menuPrincipal();
       break;

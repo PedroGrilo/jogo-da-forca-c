@@ -16,8 +16,29 @@ typedef struct {
 } USERS;
 
 
-void userdatamenu(USER p1){
-
+void userdatamenu(USERS p1){
+    char op;
+    int a;
+    system("cls");
+    printf("/***************************************/\n");
+    printf("/** Jogo da Forca - Editar Informação **/\n");
+    printf("/***************************************/\n");
+    printf("\n1. Entrar");
+    printf("\n2. Registar");
+    printf("\n0. Sair");
+    printf("\n\nEscolha uma opcão: ");
+    scanf(" %c", &op);
+    switch (op) {
+        case '1':
+            loginMenu();
+        break;
+        case '2':
+            menuNovoUtilizador();
+        break;
+        case '0':
+            printf("\nVolte Sempre\n");
+        exit(1);
+    }
 };
 
 
