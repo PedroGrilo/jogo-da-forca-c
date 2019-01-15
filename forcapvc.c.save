@@ -19,19 +19,18 @@ typedef struct
 void chooseTheme(USERSPC p1, char* tema[maxforca])
 {
     char op;
-
-    setlocale(LC_ALL,Portuguese);
+    setlocale(LC_ALL,"");
     do
     {
         system("cls");
         printf("\t/***********************************/\n");
         printf("\t/** Jogo da Forca - Escolher Tema **/\n");
         printf("\t/***********************************/\n\n");
-        printf("1 - Nomes \t\t\t 5 - Profiss√µes\n");
-        printf("2 - Terras,Pa√≠ses,Cidades \t 6 - Objetos\n");
+        printf("1 - Nomes \t\t\t 5 - Profissıes\n");
+        printf("2 - Terras,PaÌses,Cidades \t 6 - Objetos\n");
         printf("3 - Animais \t\t\t 7 - Comidas\n");
-        printf("4 - Cores \t\t\t 8 - Pe√ßas de Roupas\n");
-        printf("\n0 - Voltar\n\nEscolha a op√ß√£o: ");
+        printf("4 - Cores \t\t\t 8 - PeÁas de Roupas\n");
+        printf("\n0 - Voltar\n\nEscolha a opÁ„o: ");
         scanf(" %c", &op);
     } while (op < 0 && op > 8);
 
@@ -96,7 +95,7 @@ void wordspc(USERSPC p1)
                 strcpy(palavrast[max], palavrapesq);
                 max++;
             }else{
-                printf("\n> N√£o existe palavras para este tema no ficheiro.\n\nPressione qualquer tecla para continuar.");
+                printf("\n> N„o existe palavras para este tema no ficheiro.\n\nPressione qualquer tecla para continuar.");
                 fflush(stdin);
                 getchar();
                 menuForca(p1);
@@ -111,7 +110,7 @@ void wordspc(USERSPC p1)
 
         for (k = 0; k < i; k++)
         {
-            // criar uma variavel, com os underscores correspondentes √† frase
+            // criar uma variavel, com os underscores correspondentes ‡ frase
             // introduzida.
 
             if (verificacoes(forca) == 0)
@@ -154,9 +153,9 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
             header(p1.nome, msg, falhascount, tentativa, i);
 
         if (strcmp(tema, "TPC") == 0)
-            printf("Tema : Terras,Pa√≠ses,Cidades\n\n");
+            printf("Tema : Terras,PaÌses,Cidades\n\n");
         else if (strcmp(tema, "PdR") == 0)
-            printf("Tema : Pe√ßas de Roupa\n\n");
+            printf("Tema : PeÁas de Roupa\n\n");
         else
             printf("Tema : %s\n\n", tema);
         fflush(stdin);
@@ -172,7 +171,7 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
             if (i < 2 && isvogal(tentativa[i]))
             {
                 system("cls");
-                strcpy(msg, "\nNao sao aceites vogais at√© √† terceira ronda, tente "
+                strcpy(msg, "\nNao sao aceites vogais atÈ ‡ terceira ronda, tente "
                             "novamente!\n");
                 continue;
             }
@@ -215,7 +214,7 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
                     if (tolower(tentativa[i]) == tolower(tentativa[k]))
                     {
                         system("cls");
-                        strcpy(msg, "\nERRO: Esse caracter j√° foi introduzido\n");
+                        strcpy(msg, "\nERRO: Esse caracter j· foi introduzido\n");
                         i--;
                         samechar = 1;
                         continue;
