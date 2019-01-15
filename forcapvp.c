@@ -79,7 +79,7 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1) {
   // player 2, adivinhar a palavra/frase do player 1
 
   char tentativa[26], falhas[6], msg[maxforca] = {}, voltar;
-  int i = 0, k = 0, samechar = 0, guesssize = strlen(forca), falha = 1,falhascount = 0, counter = 0;
+  int i = 0, k = 0,g, samechar = 0, guesssize = strlen(forca), falha = 1,falhascount = 0, counter = 0;
 
   do {
     fflush(stdin);
@@ -88,7 +88,7 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1) {
       header(p2.nome, msg, falhascount, tentativa, i);
     fflush(stdin);
 
-    for (int i = 0; i < guesssize; i++) printf("%c ", frase[i]);
+    for (g = 0; i < guesssize; i++) printf("%c ", frase[i]);
     if (falhascount != 7 && falhascount != 6) {
       puts("\n\nIntroduza uma letra (0-Desistir) > ");  // desistir do jogo
       fflush(stdin);
@@ -269,6 +269,8 @@ int verificacoes(char nome[])  // verifica se a frase que o player 1 introduz,
                                // têm pelo menos 3 caracteres, não conter
                                // espaços inciais e caracteres especiais
 {
+    int i;
+
   if (strlen(nome) < 3) {
     printf("A frase N�O pode conter menos de 3 caracteres\n\n");
     return 1;
@@ -278,7 +280,7 @@ int verificacoes(char nome[])  // verifica se a frase que o player 1 introduz,
   } else {
     int tst = 0;
 
-    for (int i = 0; i < strlen(nome); i++) {
+    for ( i = 0; i < strlen(nome); i++) {
       if ((nome[i] >= 97 && nome[i] <= 122) || (nome[i] >= 65 && nome[i] <= 90) || nome[i] == 32) {
         tst = 0;
       } else {
