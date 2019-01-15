@@ -20,18 +20,17 @@ void chooseTheme(USERSPC p1, char* tema[maxforca])
 {
     char op;
 
-    setlocale(LC_ALL,Portuguese);
     do
     {
         system("cls");
         printf("\t/***********************************/\n");
         printf("\t/** Jogo da Forca - Escolher Tema **/\n");
         printf("\t/***********************************/\n\n");
-        printf("1 - Nomes \t\t\t 5 - Profiss√µes\n");
-        printf("2 - Terras,Pa√≠ses,Cidades \t 6 - Objetos\n");
+        printf("1 - Nomes \t\t\t 5 - Profissıes\n");
+        printf("2 - Terras,PaÌses,Cidades \t 6 - Objetos\n");
         printf("3 - Animais \t\t\t 7 - Comidas\n");
-        printf("4 - Cores \t\t\t 8 - Pe√ßas de Roupas\n");
-        printf("\n0 - Voltar\n\nEscolha a op√ß√£o: ");
+        printf("4 - Cores \t\t\t 8 - PeÁas de Roupas\n");
+        printf("\n0 - Voltar\n\nEscolha a opÁ„o: ");
         scanf(" %c", &op);
     } while (op < 0 && op > 8);
 
@@ -84,7 +83,7 @@ void wordspc(USERSPC p1)
     srand(time(NULL));
     FILE* palavras;
 
-    palavras = fopen("palavras.txt", "r+");
+    palavras = fopen("palavras.txt", "r");
 
     if (palavras != NULL)
     {
@@ -96,7 +95,7 @@ void wordspc(USERSPC p1)
                 strcpy(palavrast[max], palavrapesq);
                 max++;
             }else{
-                printf("\n> N√£o existe palavras para este tema no ficheiro.\n\nPressione qualquer tecla para continuar.");
+                printf("\n> N√O existe palavras para este tema no ficheiro.\n\nPressione qualquer tecla para continuar.");
                 fflush(stdin);
                 getchar();
                 menuForca(p1);
@@ -154,9 +153,9 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
             header(p1.nome, msg, falhascount, tentativa, i);
 
         if (strcmp(tema, "TPC") == 0)
-            printf("Tema : Terras,Pa√≠ses,Cidades\n\n");
+            printf("Tema : Terras,PaÌses,Cidades\n\n");
         else if (strcmp(tema, "PdR") == 0)
-            printf("Tema : Pe√ßas de Roupa\n\n");
+            printf("Tema : PeÁas de Roupa\n\n");
         else
             printf("Tema : %s\n\n", tema);
         fflush(stdin);
@@ -165,15 +164,14 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
             printf("%c ", frase[i]);
         if (falhascount != 7 && falhascount != 6)
         {
-            puts("\n\nIntroduza uma letra 0-Desistir > "); // desistir do jogo
+            puts("\n\nIntroduza uma letra(0-Desistir > "); // desistir do jogo
             fflush(stdin);
             scanf("%c", &tentativa[i]);
             strcpy(msg, "");
             if (i < 2 && isvogal(tentativa[i]))
             {
                 system("cls");
-                strcpy(msg, "\nNao sao aceites vogais at√© √† terceira ronda, tente "
-                            "novamente!\n");
+                strcpy(msg, "\nN√O sao aceites vogais atÈ ‡ terceira ronda, tente novamente!\n");
                 continue;
             }
 
@@ -182,7 +180,7 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
                 if (tentativa[i] != '0')
                 {
                     system("cls");
-                    strcpy(msg, "\nNao sao aceites numeros, tente novamente!\n");
+                    strcpy(msg, "\nN√O sao aceites numeros, tente novamente!\n");
                     continue;
                 }
                 else
@@ -196,7 +194,7 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
             if (tentativa[i] == ' ')
             {
                 system("cls");
-                strcpy(msg, "\nNao sao aceites espacos, tente novamente!\n");
+                strcpy(msg, "\nN√O sao aceites espacos, tente novamente!\n");
 
                 continue;
             }
@@ -204,7 +202,7 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
                          || tentativa[i] == 32))
             {
                 system("cls");
-                strcpy(msg, "\nNao sao aceites caracteres especiais, tente novamente!\n");
+                strcpy(msg, "\nN√O sao aceites caracteres especiais, tente novamente!\n");
 
                 continue;
             }
@@ -215,7 +213,7 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
                     if (tolower(tentativa[i]) == tolower(tentativa[k]))
                     {
                         system("cls");
-                        strcpy(msg, "\nERRO: Esse caracter j√° foi introduzido\n");
+                        strcpy(msg, "\nERRO: Esse caracter j· foi introduzido\n");
                         i--;
                         samechar = 1;
                         continue;

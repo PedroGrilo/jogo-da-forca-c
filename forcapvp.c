@@ -90,22 +90,21 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1) {
 
     for (int i = 0; i < guesssize; i++) printf("%c ", frase[i]);
     if (falhascount != 7 && falhascount != 6) {
-      puts("\n\nIntroduza uma letra 0-Desistir > ");  // desistir do jogo
+      puts("\n\nIntroduza uma letra (0-Desistir) > ");  // desistir do jogo
       fflush(stdin);
       scanf("%c", &tentativa[i]);
       strcpy(msg, "");
       if (i < 2 && isvogal(tentativa[i])) {
         system("cls");
         strcpy(msg,
-               "\nNao sao aceites vogais atÃ© Ã  terceira ronda, tente "
-               "novamente!\n");
+               "\nNÃO sao aceites vogais até à terceira ronda, tente novamente!\n");
         continue;
       }
 
       if (isdigit(tentativa[i])) {
         if (tentativa[i] != '0') {
           system("cls");
-          strcpy(msg, "\nNao sao aceites numeros, tente novamente!\n");
+          strcpy(msg, "\nNÃO são aceites numeros, tente novamente!\n");
           continue;
         } else {
           system("cls");
@@ -116,7 +115,7 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1) {
       }
       if (tentativa[i] == ' ') {
         system("cls");
-        strcpy(msg, "\nNao sao aceites espacos, tente novamente!\n");
+        strcpy(msg, "\nNÃO são aceites espacos, tente novamente!\n");
 
         continue;
       } else if (!((tolower(tentativa[i]) >= 97 &&
@@ -124,14 +123,14 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1) {
                    tentativa[i] == 32)) {
         system("cls");
         strcpy(msg,
-               "\nNao sao aceites caracteres especiais, tente novamente!\n");
+               "\nNÃO são aceites caracteres especiais, tente novamente!\n");
 
         continue;
       } else {
         for (k = 0; k < i; k++) {
           if (tolower(tentativa[i]) == tolower(tentativa[k])) {
             system("cls");
-            strcpy(msg, "\nERRO: Esse caracter jÃ¡ foi introduzido\n");
+            strcpy(msg, "\nERRO: Esse caracter já foi introduzido\n");
             i--;
             samechar = 1;
             continue;
@@ -271,10 +270,10 @@ int verificacoes(char nome[])  // verifica se a frase que o player 1 introduz,
                                // espaÃ§os inciais e caracteres especiais
 {
   if (strlen(nome) < 3) {
-    printf("A frase NÃƒO pode conter menos de 3 caracteres\n\n");
+    printf("A frase NÃO pode conter menos de 3 caracteres\n\n");
     return 1;
   } else if (nome[0] == 32) {
-    printf("A frase NÃƒO pode conter espaÃ§os iniciais\n\n");
+    printf("A frase NÃO pode conter espaços iniciais\n\n");
     return 1;
   } else {
     int tst = 0;
@@ -289,7 +288,7 @@ int verificacoes(char nome[])  // verifica se a frase que o player 1 introduz,
     }
 
     if (tst == 1) {
-      printf("A frase SÃ“ pode conter letras.\n\n");
+      printf("A frase SÓ pode conter letras.\n\n");
       return 1;
     } else
       return 0;
