@@ -140,7 +140,15 @@
 
 1547551119 c:\users\sala230_pc8_ips\desktop\ctesp\afp\afp-projeto\forcapvp.h
 
-1547551525 source:c:\users\sala230_pc8_ips\desktop\ctesp\afp\afp-projeto\menus.c
+1547551687 source:c:\users\sala230_pc8_ips\desktop\ctesp\afp\afp-projeto\menus.c
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<windows.h>
+	<stdbool.h>
+	<locale.h>
+
+1547551944 source:c:\users\sala230_pc8_ips\desktop\ctesp\afp\afp-projeto\userdata.c
 	<string.h>
 	<stdlib.h>
 	<stdio.h>

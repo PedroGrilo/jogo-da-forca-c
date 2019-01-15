@@ -15,6 +15,12 @@ typedef struct {
   int jogadaspc;
 } USERS;
 
+
+void userdatamenu(USER p1){
+
+};
+
+
 int userdatalogin(USERS p1) {
     USERS p1temp;
   char nometemp[MAX_CHAR];
@@ -24,9 +30,9 @@ int userdatalogin(USERS p1) {
   FILE *fin;
   do {
     system("cls");
-    printf("/*************************************/\n");
-    printf("/** Jogo da Forca - Entrar Player 2 **/\n");
-    printf("/*************************************/\n");
+    printf("/***************************************/\n");
+    printf("/** Jogo da Forca - Editar Informação **/\n");
+    printf("/***************************************/\n");
     if (vEspacos(nometemp) == 1) {
       printf("\nO nome NÃO pode conter espaços\n");
     } else if (vEspacos(passtemp) == 1) {
@@ -48,12 +54,7 @@ int userdatalogin(USERS p1) {
   {
     fread(&p1temp, sizeof(USERS), 1, fin);
     if ((!strcmp(nometemp, p1temp.nome)) && (!strcmp(passtemp, p1temp.pass))) {
-      if ((strcmp(p1temp.nome, p1.nome))) {
-        logged = 1;
-        break;
-      } else {
-        logged = 2;
-      }
+      logged=1;
     }
   }
   fclose(fin);
@@ -61,10 +62,6 @@ int userdatalogin(USERS p1) {
     printf("\n\tEntrou com sucesso na sua conta!\n");
     Sleep(1000);
     return 1;
-  } else if (logged == 2) {
-    printf("\n\tA conta nao pode ser a mesma do player 1...");
-    Sleep(1000);
-    return 0;
   } else {
     printf("\n\tSenha incorreta, tente novamente!\n");
     Sleep(1000);
