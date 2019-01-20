@@ -264,6 +264,7 @@ void menuForca(USERS p1) {
   printf("\n1. P1 VS P2");
   printf("\n2. P1 VS PC");
   printf("\n3. Ver Ranking");
+  printf("\n4. Editar Conta");
   printf("\n0. Sair ");
   printf("\n\nEscolha uma opção > ");
   fflush(stdin);
