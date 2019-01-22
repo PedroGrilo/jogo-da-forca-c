@@ -286,7 +286,7 @@ void deleteacc(USERS p1) {
 
         fflush(stdin);
         rename(usersf_tmp, usersf);
-system("pause");
+        system("pause");
 
 
     }
