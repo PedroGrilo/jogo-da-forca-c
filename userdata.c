@@ -42,7 +42,7 @@ void userdatamenu(USERS p1){
             altpoints(p1);
         break;
         case '4':
-
+            deleteacc(p1);
         break;
         case '0':
             printf("\nVolte Sempre\n");
@@ -203,11 +203,13 @@ void altpoints(USERS p1){
   recsize = sizeof(tempuser);
   do{
   system("cls");
-  printf("Insira \"REDEFINIR\" para redefinir os seus pontos a 0 >");
+  printf("Insira \"REDEFINIR\" para redefinir os seus pontos a 0 (0 - cancelar)>");
   fflush(stdin);
   gets(red);
+  if(red=='0')
+    break;
   }while(strcmp(red,"REDEFINIR")==1);
-
+  if(red != '0'){
     tempuser.jogadas=0;
     tempuser.jogadaspc=0;
     tempuser.pontos=0;
@@ -229,11 +231,73 @@ void altpoints(USERS p1){
     p1.jogadaspc=0;
     p1.pontos=0;
     p1.pontosvspc=0;
+  }
   userdatamenu(p1);
+
 }
 
 
 
 void deleteacc(USERS p1){
+    typedef struct {
+      char nome[MAX_CHAR];
+      char pass[MAX_CHAR];
+      int pontos;
+      int pontosvspc;
+      int jogadas;
+      int jogadaspc;
+    } USERS;
+    long int recsize;
+    USERS tempuser,buffer,tempbuf;
+    FILE *f;
+    f = fopen("users.dat", "rb+");
+  rewind(f);
+  char red[MAX_CHAR];
+  recsize = sizeof(tempuser);
+  do{
+  system("cls");
+  printf("Insira \"APAGAR\" para redefinir os seus pontos a 0 >");
+  fflush(stdin);
+  gets(red);
+  if(red=='0')
+    break;
+  }while(strcmp(red,"APAGAR")==1);
+  if(red != '0'){
+    tempuser.jogadas=p1.jogadas;
+    tempuser.jogadaspc=p1.jogadaspc;
+    tempuser.pontos=p1.pontos;
+    tempuser.pontosvspc=p1.pontosvspc;
+    strcpy(tempuser.nome,p1.nome);
+    strcpy(tempuser.pass,p1.pass);
 
+    while (!feof(f)) {
+        if(feof(f))
+            break;
+        else{
+            fread(&tempbuf, recsize, 1, f);
+
+        }
+    }
+
+
+    while (fread(&buffer, recsize, 1, f) == 1) {
+        printf(">%s %s\n",buffer.nome,buffer.pass);
+        if (strcmp(buffer.nome, p1.nome) == 0) {
+          fseek(f, -recsize, SEEK_CUR);
+          fflush(f);
+          fwrite(&tempbuf, recsize, 1, f);
+          break;
+        }
+    }
+
+  fclose(f);
+  fflush(stdin);
+  getchar();
+  fflush(stdin);
+    p1.jogadas=0;
+    p1.jogadaspc=0;
+    p1.pontos=0;
+    p1.pontosvspc=0;
+  }
+  userdatamenu(p1);
 }
