@@ -101,7 +101,6 @@ void altnom(USERS p1){
     strcpy(tempuser.pass,p1.pass);
 
   while (fread(&buffer, recsize, 1, f) == 1) {
-      printf(">%s %s\n",buffer.nome,buffer.pass);
     if (strcmp(buffer.nome, p1.nome) == 0) {
       fseek(f, -recsize, SEEK_CUR);
       fflush(f);
@@ -166,7 +165,6 @@ void altpass(USERS p1){
     strcpy(tempuser.pass,passtemp);
 
   while (fread(&buffer, recsize, 1, f) == 1) {
-      printf(">%s %s\n",buffer.nome,buffer.pass);
     if (strcmp(buffer.nome, p1.nome) == 0) {
       fseek(f, -recsize, SEEK_CUR);
       fflush(f);
@@ -209,7 +207,7 @@ void altpoints(USERS p1){
   if(red=='0')
     break;
   }while(strcmp(red,"REDEFINIR")==1);
-  if(red != '0'){
+  if(strcmp(red,"0")==1){
     tempuser.jogadas=0;
     tempuser.jogadaspc=0;
     tempuser.pontos=0;
@@ -218,7 +216,6 @@ void altpoints(USERS p1){
     strcpy(tempuser.pass,p1.pass);
 
   while (fread(&buffer, recsize, 1, f) == 1) {
-      printf(">%s %s\n",buffer.nome,buffer.pass);
     if (strcmp(buffer.nome, p1.nome) == 0) {
       fseek(f, -recsize, SEEK_CUR);
       fflush(f);
@@ -235,8 +232,6 @@ void altpoints(USERS p1){
   userdatamenu(p1);
 
 }
-
-
 
 void deleteacc(USERS p1){
     typedef struct {
@@ -259,10 +254,13 @@ void deleteacc(USERS p1){
   printf("Insira \"APAGAR\" para redefinir os seus pontos a 0 >");
   fflush(stdin);
   gets(red);
-  if(red=='0')
+  if(strcmp(red,"0")==0)
     break;
   }while(strcmp(red,"APAGAR")==1);
-  if(red != '0'){
+  if(strcmp(red,"0")==0){
+        userdatamenu(p1);
+  }else{
+
     tempuser.jogadas=p1.jogadas;
     tempuser.jogadaspc=p1.jogadaspc;
     tempuser.pontos=p1.pontos;
@@ -275,29 +273,39 @@ void deleteacc(USERS p1){
             break;
         else{
             fread(&tempbuf, recsize, 1, f);
-
         }
     }
-
-
+    fflush(stdin);
+    rewind(f);
     while (fread(&buffer, recsize, 1, f) == 1) {
-        printf(">%s %s\n",buffer.nome,buffer.pass);
         if (strcmp(buffer.nome, p1.nome) == 0) {
           fseek(f, -recsize, SEEK_CUR);
+          fflush(f);
+          fwrite(&tempbuf, recsize, 1, f);
+
+          strcpy(tempbuf.nome,"DELETED USER");
+          strcpy(tempbuf.pass,"IASDGAUIDGAISUDASIUDHASUDHSJHDSIUDY");
+          tempbuf.jogadas=-1;
+          tempbuf.jogadaspc=-1;
+          tempbuf.pontos=-1;
+          tempbuf.pontosvspc=-1;
+
+          fseek(f, -recsize, SEEK_END);
           fflush(f);
           fwrite(&tempbuf, recsize, 1, f);
           break;
         }
     }
 
+
+
+
   fclose(f);
-  fflush(stdin);
-  getchar();
-  fflush(stdin);
     p1.jogadas=0;
     p1.jogadaspc=0;
     p1.pontos=0;
     p1.pontosvspc=0;
+
+  menuPrincipal();
   }
-  userdatamenu(p1);
 }

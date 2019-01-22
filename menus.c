@@ -325,7 +325,7 @@ void ranking(USERS p1) {
 }
 
 void rankpvp(USERS p1) {
-  int i = 0,t=0,x=0,n=0;
+  int i = 0,t=0,x=0,n=0,counter=0;
   typedef struct {
     char nome[21];
     char pass[21];
@@ -353,7 +353,7 @@ void rankpvp(USERS p1) {
     printf("/******** Ranking P1 VS P2 **********/\n");
     printf("/************************************/\n");
     printf("\n    Nome      |NºJogos| Pontos:\n");
-    printf("\n    %-10s |  %d  | %04d \n\n", p1.nome, p1.jogadas, p1.pontos);
+    printf("\n    %-30s |  %d  | %04d \n\n", p1.nome, p1.jogadas, p1.pontos);
     printf("************ HIGHSCORES *************\n\n");
 
     rewind(getpoints);
@@ -389,9 +389,15 @@ void rankpvp(USERS p1) {
         }
       }
     }
-    for (x = 0; x < i; x++)  // printf dos dados dos utilizadores
-      printf(" %d. %-10s |  %d  | %04d \n", x + 1, buffer[x].nome,
+    for (x = 0; x < i; x++)
+    if(buffer[x].pontosvspc!=-1){
+      printf(" %d. %-30s |  %d  | %04d \n", counter + 1, buffer[x].nome,
              buffer[x].jogadas, buffer[x].pontos);
+      counter++;
+    }
+    else{
+        counter--;
+    }
 
     fclose(getpoints);
     printf("\n************************************\n");
@@ -401,7 +407,7 @@ void rankpvp(USERS p1) {
 }
 
 void rankpvc(USERS p1) {
-  int i = 0,x=0,n=0,t=0;
+  int i = 0,x=0,n=0,t=0,counter=0;
   typedef struct {
     char nome[21];
     char pass[21];
@@ -428,7 +434,7 @@ void rankpvc(USERS p1) {
     printf("/******** Ranking P1 VS PC **********/\n");
     printf("/************************************/\n");
     printf("\n    Nome      |NºJogos| Pontos:\n");
-    printf("\n    %-10s |  %d  | %04d \n\n", p1.nome, p1.jogadaspc,
+    printf("\n    %-30s |  %d  | %04d \n\n", p1.nome, p1.jogadaspc,
            p1.pontosvspc);
     printf("************ HIGHSCORES *************\n\n");
 
@@ -465,9 +471,16 @@ void rankpvc(USERS p1) {
         }
       }
     }
-    for (x = 0; x < i; x++)  // printf dos dados dos utilizadores
-      printf(" %d. %-10s |  %d  | %04d \n", x + 1, buffer[x].nome,
+
+    for (x = 0; x < i; x++)
+    if(buffer[x].pontosvspc!=-1){
+      printf(" %d. %-30s |  %d  | %04d \n", counter + 1, buffer[x].nome,
              buffer[x].jogadaspc, buffer[x].pontosvspc);
+      counter++;
+    }
+    else{
+        counter--;
+    }
 
     fclose(getpoints);
     printf("\n************************************\n");
