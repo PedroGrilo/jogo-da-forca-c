@@ -24,7 +24,7 @@ void userdatamenu(USERS p1) {
     printf("/***************************************/\n");
     printf("/** Jogo da Forca - Editar Informação **/\n");
     printf("/***************************************/\n");
-    printf("\n1. Alterar password");
+    printf("\n1. Alterar palavra-passe");
     printf("\n2. Alterar nome de utilizador");
     printf("\n3. Redefinir pontos");
     printf("\n4. Apagar conta");
@@ -69,10 +69,10 @@ void altnom(USERS p1) {
     recsize = sizeof(tempuser);
     do {
         system("cls");
-        printf("Introduza o seu novo nome >");
+        printf("Introduza o seu novo nome de utilizador > ");
         fflush(stdin);
         gets(nometemp);
-        printf("Confirme o seu novo nome >");
+        printf("Confirme o seu novo nome de utilizador > ");
         fflush(stdin);
         gets(nometempver);
     } while(strcmp(nometemp,nometempver)==1);
@@ -110,15 +110,14 @@ void altnom(USERS p1) {
         }
         fclose(f);
         strcpy(p1.nome,tempuser.nome);
+         printf("Nome de utilizador alterado com sucesso,prima qualquer tecla para continuar.\n");getchar();
     } else if(userex == 1) {
         printf(
-            "\n\tUtilizador ja existe, prima qualquer tecla para voltar ao menu "
-            "principal.");
+            "\n\tUtilizador ja existe, prima qualquer tecla para voltar ao menu principal.");
         getchar();
     } else {
         printf(
-            "\n\tNão pode conter espaços, prima qualquer tecla para voltar ao menu "
-            "principal.");
+            "\n\tNão pode conter espaços, prima qualquer tecla para voltar ao menu principal.");
         getchar();
     }
     userdatamenu(p1);
@@ -144,10 +143,10 @@ void altpass(USERS p1) {
     recsize = sizeof(tempuser);
     do {
         system("cls");
-        printf("Introduza a sua nova pass >");
+        printf("Introduza a sua nova palavra-passe > ");
         fflush(stdin);
         gets(passtemp);
-        printf("Confirme a sua nova pass >");
+        printf("Confirme a sua nova palavra-passe > ");
         fflush(stdin);
         gets(passtempver);
     } while(strcmp(passtemp,passtempver)==1);
@@ -174,10 +173,10 @@ void altpass(USERS p1) {
         }
         fclose(f);
         strcpy(p1.pass,tempuser.pass);
+        printf("Palavra-passe alterada com sucesso,prima qualquer tecla para continuar.\n");getchar();
     } else {
         printf(
-            "\n\tNão pode conter espaços, prima qualquer tecla para voltar ao menu "
-            "principal.");
+            "\n\tNão pode conter espaços, prima qualquer tecla para voltar ao menu principal.");
         getchar();
     }
     userdatamenu(p1);
@@ -201,7 +200,7 @@ void altpoints(USERS p1) {
     recsize = sizeof(tempuser);
     do {
         system("cls");
-        printf("Insira \"REDEFINIR\" para redefinir os seus pontos a 0 (0 - cancelar)>");
+        printf("Insira \"REDEFINIR\" para redefinir os seus pontos a 0 (0 - Cancelar) > ");
         fflush(stdin);
         gets(red);
         if(red=='0')
@@ -228,6 +227,8 @@ void altpoints(USERS p1) {
         p1.jogadaspc=0;
         p1.pontos=0;
         p1.pontosvspc=0;
+        printf("Pontos redefinidos com sucesso, prima qualquer tecla para continuar.\n");getchar();
+
     }
     userdatamenu(p1);
 
@@ -242,27 +243,19 @@ void deleteacc(USERS p1) {
         int jogadas;
         int jogadaspc;
     } USERS;
-
     long int recsize;
     char red[MAX_CHAR];
-
     USERS tempuser,buffer,tempbuf;
     FILE *f;
     FILE *f_tmp;
-
-
     char usersf_tmp[] = "users_tmp.dat";
     char usersf[] = "users.dat";
-
-
     f_tmp = fopen(usersf_tmp, "wb");
     f = fopen(usersf, "rb+");
-
     recsize = sizeof(tempuser);
-
     do {
         system("cls");
-        printf("Insira \"APAGAR\" para apagar a sua conta >");
+        printf("Insira \"APAGAR\" para apagar a sua conta (0 - Cancelar) >");
         fflush(stdin);
         gets(red);
         if(strcmp(red,"0")==0)
@@ -286,7 +279,7 @@ void deleteacc(USERS p1) {
 
         fflush(stdin);
         rename(usersf_tmp, usersf);
-        system("pause");
+          printf("Conta eliminada com sucesso, volte sempre :)\n");getchar();
 
 
     }

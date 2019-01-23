@@ -1,0 +1,49 @@
+TPC - Mongolia
+TPC - Dinamarca
+TPC - Russia
+TPC - Reino Unido
+TPC - Talefe	
+TPC - Ericeira
+TPC - Carvoeira
+TPC - La Valleta
+Nomes - Ildefonso
+Nomes - Marcia
+Nomes - Marcio
+Nomes - Julia
+Nomes - Quirino
+Nomes - Natividade
+Nomes - Arminda
+Comidas - bacalhau com natas
+Comidas - arroz
+Comidas - gambas
+Comidas - robalo
+Comidas - lulas grelhadas
+Comidas - lasanha
+Comidas - pizza
+Profissoes - rececionista
+Profissoes - gestor
+Profissoes - enfermeiro
+Profissoes - engenheiro civil
+Animais - dromedario
+Animais - camelo
+Animais - rinoceronte
+Animais - egua
+Animais - iguana
+Objetos - computador
+Objetos - verniz
+Objetos - catalizador
+Objetos - televisao
+Objetos - armario
+Objetos - globo
+Cores - bege
+Cores - preto
+Cores - magenta
+Cores - ciano
+Cores - escarlate
+Cores - branco
+Cores - azul
+PdR - gola
+PdR - cachecol
+PdR - camisa
+PdR - casaco
+PdR - luvas

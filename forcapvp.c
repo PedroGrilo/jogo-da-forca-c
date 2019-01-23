@@ -97,14 +97,14 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1) {
       if (i < 2 && isvogal(tentativa[i])) {
         system("cls");
         strcpy(msg,
-               "\nNÃO sao aceites vogais até à terceira ronda, tente novamente!\n");
+               "\nNï¿½O sao aceites vogais atï¿½ï¿½ terceira ronda, tente novamente!\n");
         continue;
       }
 
       if (isdigit(tentativa[i])) {
         if (tentativa[i] != '0') {
           system("cls");
-          strcpy(msg, "\nNÃO são aceites numeros, tente novamente!\n");
+          strcpy(msg, "\nNï¿½O sï¿½o aceites numeros, tente novamente!\n");
           continue;
         } else {
           system("cls");
@@ -115,7 +115,7 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1) {
       }
       if (tentativa[i] == ' ') {
         system("cls");
-        strcpy(msg, "\nNÃO são aceites espacos, tente novamente!\n");
+        strcpy(msg, "\nNï¿½O sï¿½o aceites espacos, tente novamente!\n");
 
         continue;
       } else if (!((tolower(tentativa[i]) >= 97 &&
@@ -123,14 +123,14 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1) {
                    tentativa[i] == 32)) {
         system("cls");
         strcpy(msg,
-               "\nNÃO são aceites caracteres especiais, tente novamente!\n");
+               "\nNï¿½O sï¿½o aceites caracteres especiais, tente novamente!\n");
 
         continue;
       } else {
         for (k = 0; k < i; k++) {
           if (tolower(tentativa[i]) == tolower(tentativa[k])) {
             system("cls");
-            strcpy(msg, "\nERRO: Esse caracter já foi introduzido\n");
+            strcpy(msg, "\nERRO: Esse caracter jï¿½ foi introduzido\n");
             i--;
             samechar = 1;
             continue;
@@ -272,10 +272,10 @@ int verificacoes(char nome[])  // verifica se a frase que o player 1 introduz,
     int i;
 
   if (strlen(nome) < 3) {
-    printf("A frase NÃO pode conter menos de 3 caracteres\n\n");
+    printf("A frase Nï¿½O pode conter menos de 3 caracteres\n\n");
     return 1;
   } else if (nome[0] == 32) {
-    printf("A frase NÃO pode conter espaços iniciais\n\n");
+    printf("A frase Nï¿½O pode conter espaï¿½os iniciais\n\n");
     return 1;
   } else {
     int tst = 0;
@@ -290,7 +290,7 @@ int verificacoes(char nome[])  // verifica se a frase que o player 1 introduz,
     }
 
     if (tst == 1) {
-      printf("A frase SÓ pode conter letras.\n\n");
+      printf("A frase Sï¿½ pode conter letras.\n\n");
       return 1;
     } else
       return 0;
