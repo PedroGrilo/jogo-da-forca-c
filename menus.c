@@ -23,7 +23,9 @@ FILE *fin;
 void menuPrincipal() {
   char op;
   int a;
-  system("cls");
+
+do{
+          system("cls");
   printf("/*******************/\n");
   printf("/** Jogo da Forca **/\n");
   printf("/*******************/\n");
@@ -43,7 +45,7 @@ void menuPrincipal() {
       printf("\nVolte Sempre\n");
       exit(1);
   }
-
+}while(op!='0');
 }
 
 int vEspacos(char string[])  // verificação de espaços, ou enter's

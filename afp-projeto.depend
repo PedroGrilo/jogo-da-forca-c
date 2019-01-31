@@ -186,3 +186,53 @@
 	<stdbool.h>
 	<locale.h>
 
+1548227772 source:c:\users\sala230_pc10_ips\desktop\afp-projeto-forca2.0\afp-projeto-forca2.0\animacao.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<string.h>
+
+1548762433 source:c:\users\sala230_pc10_ips\desktop\afp-projeto-forca2.0\afp-projeto-forca2.0\forcapvc.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<string.h>
+	"menus.h"
+
+1548227772 c:\users\sala230_pc10_ips\desktop\afp-projeto-forca2.0\afp-projeto-forca2.0\menus.h
+
+1548761450 source:c:\users\sala230_pc10_ips\desktop\afp-projeto-forca2.0\afp-projeto-forca2.0\forcapvp.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1548227772 source:c:\users\sala230_pc10_ips\desktop\afp-projeto-forca2.0\afp-projeto-forca2.0\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<string.h>
+	<ctype.h>
+	"menus.h"
+	"forcapvc.h"
+	"forcapvp.h"
+
+1548227772 c:\users\sala230_pc10_ips\desktop\afp-projeto-forca2.0\afp-projeto-forca2.0\forcapvc.h
+
+1548227772 c:\users\sala230_pc10_ips\desktop\afp-projeto-forca2.0\afp-projeto-forca2.0\forcapvp.h
+
+1548761243 source:c:\users\sala230_pc10_ips\desktop\afp-projeto-forca2.0\afp-projeto-forca2.0\menus.c
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<windows.h>
+	<stdbool.h>
+	<locale.h>
+
+1548227772 source:c:\users\sala230_pc10_ips\desktop\afp-projeto-forca2.0\afp-projeto-forca2.0\userdata.c
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<windows.h>
+	<stdbool.h>
+	<locale.h>
+

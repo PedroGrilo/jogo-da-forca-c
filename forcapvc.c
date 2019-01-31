@@ -152,7 +152,7 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
         if (samechar != 1)
             system("cls");
         if (falhascount != 7 && falhascount != 6)
-            header(p1.nome, msg, falhascount, tentativa, i);
+            header(p1.nome, msg, falhascount, tentativa, i,"");
 
         if (strcmp(tema, "TPC") == 0)
             printf("Tema : Terras,Países,Cidades\n\n");
@@ -247,7 +247,7 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
                 else if (falhascount > 6)
                 {
                     system("cls");
-                    header(p1.nome, msg, 7, tentativa, i);
+                    header(p1.nome, msg, 7, tentativa, i,forca);
                     printf("Perdeu o jogo contra o PC!!\n");
                     printf("\n\nDeseja voltar ao menu?[S/N]");
                     getchar();
@@ -261,7 +261,7 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
                 if (strcmp(forca, frase) == 0) // player 1
                 {
                     system("cls");
-                    header(p1.nome, msg, 8, tentativa, i);
+                    header(p1.nome, msg, 8, tentativa, i,forca);
                     printf("Ganhou o jogo contra o PC !!\n\n");
                     savepointspc(falhascount, p1, guesssize);
                 }
@@ -271,7 +271,7 @@ void guesserpc(char forca[maxforca], char frase[maxforca], USERSPC p1, char tema
         else
         {
             system("cls");
-            header(p1.nome, msg, 7, tentativa, i);
+            header(p1.nome, msg, 7, tentativa, i,forca);
             printf("Perdeu o jogo contra o PC!!\n");
             printf("\n\nDeseja voltar ao menu?[S/N]");
             fflush(stdin);

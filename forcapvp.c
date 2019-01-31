@@ -14,19 +14,22 @@ typedef struct {
 loginMenu();
 int isvogal(char letra)  // verificar se é vogal
 {
-  if (letra == 'a' || letra == 'e' || letra == 'i' || letra == 'o' || letra == 'u')
+  if (tolower(letra) == 'a' || tolower(letra) == 'e' || tolower(letra) == 'i' || tolower(letra) == 'o' || tolower(letra) == 'u')
     return 1;
   else
     return 0;
 }
 
-void header(char nome[], char msg[], int vidas, char tentativas[], int i) {
+void header(char nome[], char msg[], int vidas, char tentativas[], int i,char palavra[]) {
   int k = 0;
   system("cls");
   printf("/**********************************/\n");
   printf("/** Jogo da Forca - Player %-06s**/\n", nome);
   printf("/**********************************/\n");
   vida(vidas);
+  if(strcmp(palavra,"")!=0){
+    printf("Palavra/Frase introduzida: %s\n",palavra);
+  }
   printf("\nLetras ja usadas: ");
   for (k = 0; k < i; k++) printf("%c ", tentativas[k]);
   printf("\n");
@@ -85,7 +88,7 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1) {
     fflush(stdin);
     if (samechar != 1) system("cls");
     if (falhascount != 7 && falhascount != 6)
-      header(p2.nome, msg, falhascount, tentativa, i);
+      header(p2.nome, msg, falhascount, tentativa, i,"");
     fflush(stdin);
 
     for (g = 0; g < guesssize; g++) printf("%c ", frase[g]);
@@ -155,7 +158,7 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1) {
           falhascount++;
         } else if (falhascount > 6) {
           system("cls");
-          header(p1.nome, msg, 7, tentativa, i);
+          header(p1.nome, msg, 7, tentativa, i,forca);
           printf("Perdeu o jogo (%s) a o Player '%s' !!\n", p1.nome, p2.nome);
           printf("\n\nDeseja voltar ao menu?[S/N]");
           getchar();
@@ -169,7 +172,7 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1) {
         if (strcmp(forca, frase) == 0)  // player 2
         {
           system("cls");
-          header(p2.nome, msg, 8, tentativa, i);
+          header(p2.nome, msg, 8, tentativa, i,forca);
           printf("Ganhou o jogo (%s) contra o Player '%s' !!\n\n", p2.nome,
                  p1.nome);
           savepoints(falhascount, p2, guesssize);
@@ -186,7 +189,7 @@ void guesser(char forca[maxforca], char frase[maxforca], USERS p2, USERS p1) {
       i++;
     } else {
       system("cls");
-      header(p1.nome, msg, 7, tentativa, i);
+      header(p1.nome, msg, 7, tentativa, i,forca);
       printf("Perdeu o jogo (%s) contra o Player '%s' !!\n", p1.nome, p2.nome);
       printf("\n\nDeseja voltar ao menu?[S/N]");
       fflush(stdin);
