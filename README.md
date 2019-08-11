@@ -1,3 +1,3 @@
 # Jogo da Forca
-EM C - Cadeira AFP \n
+EM C - Cadeira AFP
 Pedro Grilo && João Almeida
